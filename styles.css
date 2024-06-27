@@ -5,10 +5,19 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'ApocRevelations-Regular';
+  src: url('fonts/ApocRevelations-Regular.woff2') format('woff2'),
+       url('fonts/ApocRevelations-Regular.woff') format('woff');
+  font-style: normal;
+}
+
 :root {
   --main-color: #87A7B4; /* Pastel Duke blue */
   --accent-color: #FFC107; /* Soft coral */
   --background-color: #F5F5F5; /* Light gray */
+  --container-background: #FFFFFF; /* White for the container */
+  --page-background: #000000; /* Black for the rest of the page */
 }
 
 * {
@@ -18,11 +27,11 @@
 }
 
 body {
-  font-family: 'Satoshi-Variable', sans-serif; /* Apply the custom font to the entire body */
+  font-family: 'Satoshi-Variable', sans-serif;
   font-weight: 450;
   font-size: 16px;
-  background-color: var(--background-color);
-  color: #000; /* Set font color to black */
+  background-color: var(--page-background);
+  color: #000;
   scroll-behavior: smooth;
   opacity: 0; /* Start with the body hidden */
   transition: opacity 1s ease-in-out; /* Smooth transition */
@@ -32,17 +41,29 @@ body.fade-in {
   opacity: 1; /* Fade in when the class is added */
 }
 
-header {
-  background-color: var(--background-color);
-  padding: 30px 0; /* Adjust padding as needed */
+.container {
+  background-color: var(--container-background);
+  margin: 0px auto; /* Center the container with some margin from the top */
+  padding: 0px; /* Add some padding inside the container */
+  border-radius: 0 0 20px 20px; /* Rounded corners only at the bottom */
+  max-width: 1600px; /* Restrict the width of the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
 }
+
+header {
+  background-color: transparent;
+  padding: 30px 0; /* Adjust padding as needed */
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Stick to the top of the page */
+  z-index: 1000; /* Ensure it stays above other content */
+  width: 100%; /* Ensure it covers the full width of the page */
+}
+
 
 .header {
   display: flex;
-  justify-content: space-between; /* Space items to the start and end */
+  justify-content: space-between;
   align-items: center;
-  max-width: 1600px;
-  margin: 0 auto;
   padding: 0 1rem;
 }
 
@@ -53,14 +74,14 @@ header {
 }
 
 .branding h1 {
-  font-family: 'Satoshi-Variable', sans-serif; /* Use Satoshi-Variable for the h1 */
+  font-family: 'Satoshi-Variable', sans-serif;
   font-weight: 450;
-  font-size: 16px; /* Match the font size */
-  margin-right: 20px; /* Add space to the right */
+  font-size: 16px;
+  margin-right: 20px;
 }
 
 .branding h1 span {
-  color: var(--main-color); /* Accent color for the additional word */
+  color: var(--main-color);
 }
 
 .nav-list {
@@ -106,7 +127,7 @@ header {
 .nav-list a {
   text-decoration: none;
   color: inherit; /* Inherit color from li */
-  font-size: 16px; /* Match the font size */
+  font-size: 16px;
   padding: 8px;
   transition: color 0.2s; /* Faster frame rate */
 }
@@ -116,18 +137,18 @@ header {
 }
 
 .message {
-  margin-top: 500px; /* Position the message 500px down from the top */
-  margin-left: 20px; /* Space the message 20px from the leftmost side */
-  font-size: 24px; /* Set the font size to 24px */
-  font-weight: 450; /* Use the same font weight as before */
+  margin-top: 500px;
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: 450;
 }
 
 .large-black-box {
-  margin-top: 450px; /* Ensure it is further down the page */
-  width: 100%; /* Adjust the width as needed */
-  height: 800px; /* Adjust the height as needed */
+  margin-top: 100px;
+  width: 100%;
+  height: 1000px;
   background-color: black;
-  border-radius: 15px; /* Rounded corners */
+  border-radius: 0 0 15px 15px; /* Rounded corners only at the bottom */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,11 +157,11 @@ header {
 }
 
 .large-box {
-  margin-top: -100px; /* Ensure it is further down the page */
-  width: 100%; /* Adjust the width as needed */
-  height: 500px; /* Adjust the height as needed */
-  background-color: --background-color;
-  border-radius: 15px; /* Rounded corners */
+  margin-top: -100px;
+  width: 100%;
+  height: 500px;
+  background-color: var(--container-background);
+  border-radius: 0 0 15px 15px; /* Rounded corners only at the bottom */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,3 +169,37 @@ header {
   margin-right: auto;
 }
 
+.projects-section {
+  padding: 50px 20px; /* Adjust padding as needed */
+  background-color: white; /* White background */
+  border-radius: 15px 15px 0 0; /* Rounded top corners */
+  margin-top: -100px; /* Move section up */
+}
+
+.projects-section h2 {
+  font-size: 28px; /* Font size for section heading */
+  color: var(--main-color); /* Text color based on background */
+  text-align: center; /* Center align heading */
+  margin-bottom: 20px; /* Bottom margin for spacing */
+}
+
+.projects-section p {
+  font-size: 16px; /* Font size for paragraph */
+  color: #333; /* Paragraph text color */
+  text-align: center; /* Center align paragraph */
+  line-height: 1.6; /* Line height for readability */
+}
+
+/* New CSS for sectiontitle class */
+.sectiontitle {
+  font-family: 'ApocRevelations-Regular', sans-serif;
+  font-weight: 500;
+  font-size: 60px;
+  background-color: var(--page-background);
+  color: white;
+  position: absolute; /* Position it absolutely */
+  top: 1020px; /* Adjust top position */
+  left: 20px; /* Adjust left position */
+  padding: 10px; /* Add padding for spacing */
+  border-radius: 5px; /* Optional: Add rounded corners */
+}

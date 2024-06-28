@@ -21,7 +21,7 @@
             </nav>
         </header>
 
-        <div class="message">
+        <div class="message" style="padding-top: 550px;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
         </div>
 
@@ -30,15 +30,80 @@
         </div>
     </div>
 
-    <div class="large-black-box">
-        <div class="sectiontitle"> <!-- Corrected class name -->
+    <div id="Projects" class="large-black-box">
+        <div class="sectiontitle">
             Projects
         </div>
     </div>
 
+    <div class="projects-showcase">
+        <div class="arrow left-arrow">&#9664;</div> <!-- Left arrow -->
+        <div class="projects-container">
+            <div class="project-card">
+                <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 1">
+                <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 1 Hover">
+                <div class="caption">Project 1</div>
+            </div>
+            <div class="project-card">
+                <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 2">
+                <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 2 Hover">
+            </div>
+            <div class="project-card">
+                <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/JorisLaarmanStand.webp" alt="Project 3">
+                <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/Infinity Bike Chain.jpeg" alt="Project 3 Hover">
+            </div>
+            <!-- Add more project cards as needed -->
+        </div>
+        <div class="arrow right-arrow">&#9654;</div> <!-- Right arrow -->
+    </div>
+
+    <div id="Info" class="large-black-box"></div>
+    <div id="Lets-Chat" class="large-black-box"></div>
+    <div class="large-black-box"></div>
+    <div class="large-black-box"></div>
+    <div class="large-black-box"></div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.body.classList.add('fade-in');
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const leftArrow = document.querySelector(".left-arrow");
+            const rightArrow = document.querySelector(".right-arrow");
+            const projectsContainer = document.querySelector(".projects-container");
+
+            leftArrow.addEventListener("click", () => {
+                projectsContainer.scrollBy({
+                    left: -300, // Adjust scroll amount as needed
+                    behavior: 'smooth'
+                });
+            });
+
+            rightArrow.addEventListener("click", () => {
+                projectsContainer.scrollBy({
+                    left: 300, // Adjust scroll amount as needed
+                    behavior: 'smooth'
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('.nav-list a');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const targetId = link.getAttribute('href').substring(1); // Remove the '#'
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>

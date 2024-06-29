@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
 <script>
@@ -50,21 +50,32 @@
     <div class="projects-showcase">
         <div class="arrow left-arrow">&#9664;</div> <!-- Left arrow -->
         <div class="projects-container">
-            <div class="project-card">
-                <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 1">
-                <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 1 Hover">
-                <div class="caption">Project 1</div>
+            <div class="card-container">
+                <div class="project-card">
+                    <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 1">
+                    <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 1 Hover">
+                </div>
+                <div class="caption">Bluetooth Bike Shifter</div>
             </div>
-            <div class="project-card">
-                <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 2">
-                <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 2 Hover">
+            <div class="card-container">
+                <div class="project-card">
+                    <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 2">
+                    <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 2 Hover">
+                </div>
+                <div class="caption">Project 2</div>
             </div>
-            <div class="project-card">
-                <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/JorisLaarmanStand.webp" alt="Project 3">
-                <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/Infinity Bike Chain.jpeg" alt="Project 3 Hover">
+            
+            <div class="card-container">
+                <div class="project-card">
+                    <img class="project-image" src="/Users/elipage/Desktop/PersonalWebsite/media/BluetoothBikeShifterCoverPic.webp" alt="Project 2">
+                    <img class="project-hover-image" src="/Users/elipage/Desktop/PersonalWebsite/media/AsapFergCover.webp" alt="Project 2 Hover">
+                </div>
+                <div class="caption">Project 2</div>
             </div>
-            <!-- Add more project cards as needed -->
+
+            <!-- Add more card-container divs as needed -->
         </div>
+   
         <div class="arrow right-arrow">&#9654;</div> <!-- Right arrow -->
     </div>
 
@@ -74,48 +85,6 @@
     <div class="large-black-box"></div>
     <div class="large-black-box"></div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.body.classList.add('fade-in');
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const leftArrow = document.querySelector(".left-arrow");
-            const rightArrow = document.querySelector(".right-arrow");
-            const projectsContainer = document.querySelector(".projects-container");
-
-            leftArrow.addEventListener("click", () => {
-                projectsContainer.scrollBy({
-                    left: -300, // Adjust scroll amount as needed
-                    behavior: 'smooth'
-                });
-            });
-
-            rightArrow.addEventListener("click", () => {
-                projectsContainer.scrollBy({
-                    left: 300, // Adjust scroll amount as needed
-                    behavior: 'smooth'
-                });
-            });
-
-            // Smooth scrolling for navigation links
-            const navLinks = document.querySelectorAll('.nav-list a');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    const targetId = link.getAttribute('href').substring(1); // Remove the '#'
-                    const targetElement = document.getElementById(targetId);
-
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script> <!-- Link the script.js file -->
 </body>
 </html>

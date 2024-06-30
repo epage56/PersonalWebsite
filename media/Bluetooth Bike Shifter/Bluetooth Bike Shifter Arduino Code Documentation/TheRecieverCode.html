@@ -1,0 +1,176 @@
+<pre>
+<font color="#95a5a6">&#47;*</font>
+<font color="#95a5a6"> &nbsp;TheRecieverCode.ino</font>
+<font color="#95a5a6"></font>
+<font color="#95a5a6"> &nbsp;This program uses the ArduinoBLE library to set-up an Arduino Nano 33 BLE</font>
+<font color="#95a5a6"> &nbsp;as a peripheral device and specifies a service and a characteristic. Depending</font>
+<font color="#95a5a6"> &nbsp;of the value of the specified characteristic, one of two actuators is controlled, </font>
+<font color="#95a5a6"> &nbsp;indexing up and down. </font>
+<font color="#95a5a6"></font>
+<font color="#95a5a6"> &nbsp;This program also uses the NanoBLEFlashPrefs library to save the position of the </font>
+<font color="#95a5a6"> &nbsp;actuators late in the pages of flash space of the Arudino Nano to make small </font>
+<font color="#95a5a6"> &nbsp;space of non-volitle memory so that the actuators do not initialize at a position</font>
+<font color="#95a5a6"> &nbsp;that they are not at when the device is powered on and off.</font>
+<font color="#95a5a6"></font>
+<font color="#95a5a6"> &nbsp;The circuit:</font>
+<font color="#95a5a6"> &nbsp;- Arduino Nano 33 BLE.</font>
+<font color="#95a5a6"> &nbsp;- 2 Actuonix linear actuators</font>
+<font color="#95a5a6"></font>
+<font color="#95a5a6"> &nbsp;THIS IS FOR REVEICER ARDUINO (ACTUATOR)</font>
+<font color="#95a5a6"> &nbsp;this receives a byte of data named gesture (should be only transmitted when the &#39;gesture&#39; is differnt from the last one)</font>
+<font color="#95a5a6"> &nbsp;</font>
+<font color="#95a5a6">*&#47;</font>
+
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">ArduinoBLE</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">Servo</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">NanoBLEFlashPrefs</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<b><font color="#d35400">Servo</font></b> <font color="#000000">myServo</font><font color="#000000">;</font>
+<b><font color="#d35400">Servo</font></b> <font color="#000000">myServo2</font><font color="#000000">;</font>
+<font color="#5e6d03">#define</font> <font color="#000000">PIN_SERVO</font> <font color="#000000">(</font><font color="#000000">5</font><font color="#000000">)</font> <font color="#434f54">&#47;&#47; change to 5 for it to work</font>
+<font color="#5e6d03">#define</font> <font color="#000000">PIN_SERVO2</font> <font color="#000000">(</font><font color="#000000">7</font><font color="#000000">)</font> <font color="#434f54">&#47;&#47; change to 6 to make work</font>
+
+<font color="#00979c">const</font> <font color="#00979c">char</font><font color="#434f54">*</font> <font color="#000000">deviceServiceUuid</font> <font color="#434f54">=</font> <font color="#005c5f">&#34;19b10000-e8f2-537e-4f6c-d104768a1214&#34;</font><font color="#000000">;</font>
+<font color="#00979c">const</font> <font color="#00979c">char</font><font color="#434f54">*</font> <font color="#000000">deviceServiceCharacteristicUuid</font> <font color="#434f54">=</font> <font color="#005c5f">&#34;19b10001-e8f2-537e-4f6c-d104768a1214&#34;</font><font color="#000000">;</font>
+
+<font color="#00979c">int</font> <font color="#000000">d</font> <font color="#434f54">=</font> <font color="#000000">10</font><font color="#000000">;</font>
+<font color="#00979c">int</font> <font color="#000000">i</font> <font color="#434f54">=</font> <font color="#000000">50</font><font color="#000000">;</font>
+<font color="#00979c">int</font> <font color="#000000">i2</font> <font color="#434f54">=</font> <font color="#000000">50</font><font color="#000000">;</font>
+<font color="#00979c">int</font> <font color="#000000">VRy</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+<font color="#00979c">int</font> <font color="#000000">gesture</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+
+<font color="#434f54">&#47;&#47;struct for flash storage method (stores i, or position of actuator 1) </font>
+<font color="#00979c">typedef</font> <font color="#00979c">struct</font> <font color="#000000">positionStruct</font> <font color="#000000">{</font> 
+ &nbsp;<font color="#00979c">uint8_t</font> <font color="#000000">actuatorpos</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; 0-255 avalibile, 1 byte</font>
+ &nbsp;<font color="#000000">}</font> <font color="#000000">positionprefs</font><font color="#000000">;</font> &nbsp;
+<font color="#000000">positionprefs</font> <font color="#000000">prefs</font><font color="#000000">;</font> 
+<b><font color="#d35400">NanoBLEFlashPrefs</font></b> <font color="#000000">myFlashPrefs</font><font color="#000000">;</font>
+
+<b><font color="#d35400">BLEService</font></b> <font color="#000000">gestureService</font><font color="#000000">(</font><font color="#000000">deviceServiceUuid</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#d35400">BLEByteCharacteristic</font></b> <font color="#000000">gestureCharacteristic</font><font color="#000000">(</font><font color="#000000">deviceServiceCharacteristicUuid</font><font color="#434f54">,</font> <font color="#00979c">BLERead</font> <font color="#434f54">|</font> <font color="#00979c">BLEWrite</font><font color="#000000">)</font><font color="#000000">;</font>
+
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<font color="#000000">myServo</font><font color="#434f54">.</font><font color="#d35400">attach</font><font color="#000000">(</font><font color="#000000">PIN_SERVO</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">myServo2</font><font color="#434f54">.</font><font color="#d35400">attach</font><font color="#000000">(</font><font color="#000000">PIN_SERVO2</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">9600</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">5000</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Read record...&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#00979c">int</font> <font color="#000000">rc</font> <font color="#434f54">=</font> <font color="#000000">myFlashPrefs</font><font color="#434f54">.</font><font color="#d35400">readPrefs</font><font color="#000000">(</font><font color="#434f54">&amp;</font><font color="#000000">prefs</font><font color="#434f54">,</font> <font color="#00979c">sizeof</font><font color="#000000">(</font><font color="#000000">prefs</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">rc</font> <font color="#434f54">==</font> <font color="#000000">FDS_SUCCESS</font><font color="#000000">)</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Preferences found: &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#000000">prefs</font><font color="#434f54">.</font><font color="#000000">actuatorpos</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">i</font> <font color="#434f54">=</font> <font color="#000000">prefs</font><font color="#434f54">.</font><font color="#000000">actuatorpos</font><font color="#000000">;</font> 
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<font color="#5e6d03">else</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;No preferences found. Return code: &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#000000">rc</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;, &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#000000">myFlashPrefs</font><font color="#434f54">.</font><font color="#d35400">errorString</font><font color="#000000">(</font><font color="#000000">rc</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#434f54">!</font><b><font color="#d35400">BLE</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;- Starting Bluetooth® Low Energy module failed!&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">while</font> <font color="#000000">(</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+
+ &nbsp;<b><font color="#d35400">BLE</font></b><font color="#434f54">.</font><font color="#d35400">setLocalName</font><font color="#000000">(</font><font color="#005c5f">&#34;Arduino Nano 33 BLE (Peripheral)&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">BLE</font></b><font color="#434f54">.</font><font color="#000000">setAdvertisedService</font><font color="#000000">(</font><font color="#000000">gestureService</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">gestureService</font><font color="#434f54">.</font><font color="#d35400">addCharacteristic</font><font color="#000000">(</font><font color="#000000">gestureCharacteristic</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">BLE</font></b><font color="#434f54">.</font><font color="#d35400">addService</font><font color="#000000">(</font><font color="#000000">gestureService</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">gestureCharacteristic</font><font color="#434f54">.</font><font color="#d35400">writeValue</font><font color="#000000">(</font><font color="#434f54">-</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">BLE</font></b><font color="#434f54">.</font><font color="#d35400">advertise</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Nano 33 BLE (Peripheral Device)&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34; &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<font color="#000000">myFlashPrefs</font><font color="#434f54">.</font><font color="#d35400">garbageCollection</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<b><font color="#d35400">BLEDevice</font></b> <font color="#d35400">central</font> <font color="#434f54">=</font> <b><font color="#d35400">BLE</font></b><font color="#434f54">.</font><font color="#d35400">central</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;- Discovering central device...&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">500</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">central</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;* Connected to central device!&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;* Device MAC address: &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#d35400">central</font><font color="#434f54">.</font><font color="#d35400">address</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34; &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">while</font> <font color="#000000">(</font><font color="#d35400">central</font><font color="#434f54">.</font><font color="#d35400">connected</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">gestureCharacteristic</font><font color="#434f54">.</font><font color="#d35400">written</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">gesture</font> <font color="#434f54">=</font> <font color="#000000">gestureCharacteristic</font><font color="#434f54">.</font><font color="#d35400">value</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">writeGesture</font><font color="#000000">(</font><font color="#000000">gesture</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;* Disconnected to central device!&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#000000">SetStrokePerc</font><font color="#000000">(</font><font color="#00979c">float</font> <font color="#000000">strokePercentage</font><font color="#000000">)</font>
+<font color="#000000">{</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font> <font color="#000000">strokePercentage</font> <font color="#434f54">&gt;=</font> <font color="#000000">1.0</font> <font color="#434f54">&amp;&amp;</font> <font color="#000000">strokePercentage</font> <font color="#434f54">&lt;=</font> <font color="#000000">99.0</font> <font color="#000000">)</font> <font color="#434f54">&#47;&#47; clamps stroke percentage 1-99 so no actuator strain</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#00979c">int</font> <font color="#000000">usec</font> <font color="#434f54">=</font> <font color="#000000">1000</font> <font color="#434f54">+</font> <font color="#000000">strokePercentage</font> <font color="#434f54">*</font> <font color="#000000">(</font> <font color="#000000">2000</font> <font color="#434f54">-</font> <font color="#000000">1000</font> <font color="#000000">)</font> <font color="#434f54">&#47;</font> <font color="#000000">100.0</font> <font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">myServo</font><font color="#434f54">.</font><font color="#d35400">writeMicroseconds</font><font color="#000000">(</font> <font color="#000000">usec</font> <font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#000000">SetStrokePerc2</font><font color="#000000">(</font><font color="#00979c">float</font> <font color="#000000">strokePercentage</font><font color="#000000">)</font>
+<font color="#000000">{</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font> <font color="#000000">strokePercentage</font> <font color="#434f54">&gt;=</font> <font color="#000000">1.0</font> <font color="#434f54">&amp;&amp;</font> <font color="#000000">strokePercentage</font> <font color="#434f54">&lt;=</font> <font color="#000000">99.0</font> <font color="#000000">)</font> <font color="#434f54">&#47;&#47; clamps stroke percentage 1-99 so no actuator strain</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#00979c">int</font> <font color="#000000">usec</font> <font color="#434f54">=</font> <font color="#000000">1000</font> <font color="#434f54">+</font> <font color="#000000">strokePercentage</font> <font color="#434f54">*</font> <font color="#000000">(</font> <font color="#000000">2000</font> <font color="#434f54">-</font> <font color="#000000">1000</font> <font color="#000000">)</font> <font color="#434f54">&#47;</font> <font color="#000000">100.0</font> <font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">myServo2</font><font color="#434f54">.</font><font color="#d35400">writeMicroseconds</font><font color="#000000">(</font> <font color="#000000">usec</font> <font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#000000">SetStrokeMM</font><font color="#000000">(</font><font color="#00979c">int</font> <font color="#000000">strokeReq</font><font color="#434f54">,</font> <font color="#00979c">int</font> <font color="#000000">strokeMax</font><font color="#000000">)</font>
+<font color="#000000">{</font>
+ &nbsp;<font color="#000000">SetStrokePerc</font><font color="#000000">(</font> <font color="#000000">(</font><font color="#000000">(</font><font color="#00979c">float</font><font color="#000000">)</font><font color="#000000">strokeReq</font><font color="#000000">)</font> <font color="#434f54">&#47;</font> <font color="#000000">strokeMax</font> <font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#000000">writeGesture</font><font color="#000000">(</font><font color="#00979c">int</font> <font color="#000000">gesture</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34; - Characteristic &lt;gesture_type&gt; has changed!&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">i</font> <font color="#434f54">&gt;</font> <font color="#000000">100</font><font color="#000000">)</font> <font color="#000000">{</font> <font color="#434f54">&#47;&#47;limits i vals so we dont have i=300 etc.</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">i</font> <font color="#434f54">=</font> <font color="#000000">100</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">i</font> <font color="#434f54">&lt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">i</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">gesture</font> <font color="#434f54">==</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#434f54">&#47;&#47; if joystick is in the downshift position(ie, p = 0)</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">i</font> <font color="#434f54">-=</font> <font color="#000000">d</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; subtracts d from stroke percentage of actuator</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">SetStrokePerc</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font><font color="#434f54">&#47;&#47; sets to the new stroke percentage</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">100</font><font color="#000000">)</font><font color="#000000">;</font><font color="#434f54">&#47;&#47; delay so you get a shift and not just continuous motion</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">gesture</font> <font color="#434f54">==</font> <font color="#000000">2</font><font color="#000000">)</font> <font color="#434f54">&#47;&#47; if the joystick is below its mapped value of 55, then the actuator position is increased by d</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">i</font> <font color="#434f54">+=</font> <font color="#000000">d</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; adds d from stroke percentage of actuator</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">SetStrokePerc</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; sets to the new stroke percentage</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">100</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; delay so you get a shift and not just continuous motion</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">gesture</font> <font color="#434f54">==</font> <font color="#000000">3</font><font color="#000000">)</font>
+ &nbsp;<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;SetStrokePerc2(i2 - d); &#47;&#47; needs to be writing to the other actuator - move one way</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">2000</font><font color="#000000">)</font><font color="#000000">;</font><font color="#434f54">&#47;&#47; delay so you get a shift and not just continuous motion</font>
+ &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;SetStrokePerc2(i2);</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Dropper post!&#34;</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; comes back to where it was different pin than setstroke perc</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;
+ &nbsp;<font color="#000000">SetStrokePerc</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;i=&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#000000">i</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;
+ &nbsp;<font color="#000000">prefs</font><font color="#434f54">.</font><font color="#000000">actuatorpos</font> <font color="#434f54">=</font> <font color="#000000">i</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Write ActuatorPos...&#34;</font><font color="#000000">)</font><font color="#000000">;</font> 
+ &nbsp;<font color="#000000">myFlashPrefs</font><font color="#434f54">.</font><font color="#d35400">deletePrefs</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">myFlashPrefs</font><font color="#434f54">.</font><font color="#d35400">writePrefs</font><font color="#000000">(</font><font color="#434f54">&amp;</font><font color="#000000">prefs</font><font color="#434f54">,</font> <font color="#00979c">sizeof</font><font color="#000000">(</font><font color="#000000">prefs</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+</pre>

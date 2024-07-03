@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener('scroll', () => {
         const projectsSectionTop = projectsSection.getBoundingClientRect().top;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTop = window.pageXOffset || document.documentElement.scrollTop;
     
         if (projectsSectionTop <= 0 && scrollTop > lastScrollTop) {
             isProjectsSectionActive = true;
@@ -116,9 +116,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const sampledColor = sampleColorUnderHeader();
         const luminance = calculateLuminance(sampledColor);
         if (luminance > 0.5) {
-            header.style.color = '#000';
+            header.style.color = '#000000';
         } else {
-            header.style.color = '#fff';
+            header.style.color = '#FFFFFF';
         }
     }
 

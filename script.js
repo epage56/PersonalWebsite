@@ -1,95 +1,137 @@
 document.addEventListener("DOMContentLoaded", function() {
-  document.body.classList.add('fade-in');
+    document.body.classList.add('fade-in');
+    const projectsSection = document.getElementById('projects-section');
+    const projectsContainer = document.querySelector(".projects-container");
+    const header = document.querySelector('header');
+    const leftArrow = document.querySelector(".left-arrow");
+    const rightArrow = document.querySelector(".right-arrow");
 
-  const leftArrow = document.querySelector(".left-arrow");
-  const rightArrow = document.querySelector(".right-arrow");
-  const projectsContainer = document.querySelector(".projects-container");
-  const header = document.querySelector('header');
+    let isProjectsSectionActive = false;
+    let lastScrollTop = 0;
 
-  function smoothScroll(container, direction, amount, duration) {
-      let start = null;
-      const step = amount / (duration / 16.67); // Calculate the step size based on 60fps
+    const lenis = new Lenis({
+        duration: 0.6,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+    });
 
-      function scroll(timestamp) {
-          if (!start) start = timestamp;
-          const progress = timestamp - start;
-          container.scrollBy({
-              left: direction * step, // Scroll left or right
-              behavior: 'auto' // Disable smooth behavior for precise control
-          });
-          if (progress < duration) {
-              window.requestAnimationFrame(scroll);
-          }
-      }
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
 
-      window.requestAnimationFrame(scroll);
-  }
+    requestAnimationFrame(raf);
 
-  leftArrow.addEventListener("click", () => {
-      smoothScroll(projectsContainer, -1, 300, 1000); // Adjust scroll amount and duration as needed
-  });
+    function smoothHorizontalScroll(amount) {
+        const scrollLeft = projectsContainer.scrollLeft;
+        const maxScroll = projectsContainer.scrollWidth - projectsContainer.clientWidth;
+        
+        projectsContainer.scrollTo({
+            left: Math.max(0, Math.min(scrollLeft + amount, maxScroll)),
+            behavior: 'smooth'
+        });
+    }
 
-  rightArrow.addEventListener("click", () => {
-      smoothScroll(projectsContainer, 1, 300, 1000); // Adjust scroll amount and duration as needed
-  });
+    function isProjectsContainerAtEnd() {
+        return Math.abs(projectsContainer.scrollLeft + projectsContainer.clientWidth - projectsContainer.scrollWidth) < 1;
+    }
 
-  // Smooth scrolling for navigation links
-  const navLinks = document.querySelectorAll('.nav-list a');
+    function isProjectsContainerAtStart() {
+        return projectsContainer.scrollLeft <= 0;
+    }
 
-  navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-          e.preventDefault();
+    window.addEventListener('scroll', () => {
+        const projectsSectionTop = projectsSection.getBoundingClientRect().top;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+        if (projectsSectionTop <= 0 && scrollTop > lastScrollTop) {
+            isProjectsSectionActive = true;
+            lenis.stop();
+        } else if (scrollTop < lastScrollTop && isProjectsSectionActive && isProjectsContainerAtStart()) {
+            isProjectsSectionActive = false;
+            lenis.start();
+        }
+    
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+    
+    window.addEventListener('wheel', (e) => {
+        const projectsSectionRect = projectsSection.getBoundingClientRect();
+        if (projectsSectionRect.top <= 0 && projectsSectionRect.bottom > window.innerHeight) {
+            e.preventDefault();
+            isProjectsSectionActive = true;
+            lenis.stop();
+            
+            // Translate vertical scroll to horizontal
+            const scrollAmount = e.deltaY;
+            smoothHorizontalScroll(scrollAmount);
+    
+            // Check if we've reached the end of horizontal scrolling
+            if (isProjectsContainerAtEnd() && scrollAmount > 0) {
+                isProjectsSectionActive = false;
+                lenis.start();
+            }
+        } else if (isProjectsSectionActive && projectsSectionRect.top > 0) {
+            isProjectsSectionActive = false;
+            lenis.start();
+        }
+    }, { passive: false });
 
-          const targetId = link.getAttribute('href').substring(1); // Remove the '#'
-          const targetElement = document.getElementById(targetId);
+    // Touch events for mobile devices
+    let touchStartX;
+    let touchStartY;
+    projectsContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
 
-          if (targetElement) {
-              targetElement.scrollIntoView({
-                  behavior: 'smooth'
-              });
-          }
-      });
-  });
+    projectsContainer.addEventListener('touchmove', (e) => {
+        if (isProjectsSectionActive) {
+            e.preventDefault();
+            const touchEndX = e.touches[0].clientX;
+            const touchEndY = e.touches[0].clientY;
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
 
-  // Function to sample color directly under the header
-  function sampleColorUnderHeader() {
-      const header = document.querySelector('header');
-      const headerRect = header.getBoundingClientRect();
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                smoothHorizontalScroll(deltaX);
+            }
 
-      canvas.width = headerRect.width;
-      canvas.height = headerRect.height;
+            touchStartX = touchEndX;
+            touchStartY = touchEndY;
+        }
+    }, { passive: false });
 
-      // Draw only the area under the header into the canvas
-      ctx.drawImage(document.documentElement, headerRect.left, headerRect.top, headerRect.width, headerRect.height, 0, 0, headerRect.width, headerRect.height);
+    leftArrow.addEventListener("click", () => smoothHorizontalScroll(-300));
+    rightArrow.addEventListener("click", () => smoothHorizontalScroll(300));
 
-      const pixelData = ctx.getImageData(0, 0, 1, 1).data;
-      return `rgb(${pixelData[0]}, ${pixelData[1]}, ${pixelData[2]})`;
-  }
+    // Adjust header text color based on sampled background color
+    function adjustHeaderTextColor() {
+        const sampledColor = sampleColorUnderHeader();
+        const luminance = calculateLuminance(sampledColor);
+        if (luminance > 0.5) {
+            header.style.color = '#000';
+        } else {
+            header.style.color = '#fff';
+        }
+    }
 
-  // Adjust header text color based on sampled background color
-  function adjustHeaderTextColor() {
-      const sampledColor = sampleColorUnderHeader();
-      const luminance = calculateLuminance(sampledColor);
+    // Calculate luminance of a color
+    function calculateLuminance(rgbColor) {
+        const [r, g, b] = rgbColor.match(/\d+/g).map(Number);
+        return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    }
 
-      if (luminance > 0.5) {
-          header.style.color = '#000'; // Dark text for light background
-      } else {
-          header.style.color = '#fff'; // Light text for dark background
-      }
-  }
+    // Initially adjust text color based on the background
+    adjustHeaderTextColor();
 
-  // Calculate luminance of a color
-  function calculateLuminance(rgbColor) {
-      const [r, g, b] = rgbColor.match(/\d+/g).map(Number);
-      return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-  }
-
-  // Initially adjust text color based on the background
-  adjustHeaderTextColor();
-
-  // Adjust text color on scroll or window resize events
-  window.addEventListener('scroll', adjustHeaderTextColor);
-  window.addEventListener('resize', adjustHeaderTextColor);
+    // Adjust text color on scroll or window resize events
+    window.addEventListener('scroll', adjustHeaderTextColor);
+    window.addEventListener('resize', adjustHeaderTextColor);
 });

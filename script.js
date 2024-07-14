@@ -110,28 +110,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
     leftArrow.addEventListener("click", () => smoothHorizontalScroll(-300));
     rightArrow.addEventListener("click", () => smoothHorizontalScroll(300));
-
-    // Adjust header text color based on sampled background color
-    function adjustHeaderTextColor() {
-        const sampledColor = sampleColorUnderHeader();
-        const luminance = calculateLuminance(sampledColor);
-        if (luminance > 0.5) {
-            header.style.color = '#000000';
-        } else {
-            header.style.color = '#FFFFFF';
-        }
-    }
-
-    // Calculate luminance of a color
-    function calculateLuminance(rgbColor) {
-        const [r, g, b] = rgbColor.match(/\d+/g).map(Number);
-        return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-    }
-
-    // Initially adjust text color based on the background
-    adjustHeaderTextColor();
-
-    // Adjust text color on scroll or window resize events
-    window.addEventListener('scroll', adjustHeaderTextColor);
-    window.addEventListener('resize', adjustHeaderTextColor);
 });

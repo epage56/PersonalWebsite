@@ -237,3 +237,23 @@ header {
   font-weight: 300;
   font-size: 16px;
 }
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.project-link:hover {
+  cursor: pointer;
+}
+
+body {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+body.fade-in {
+  opacity: 1;
+}
+

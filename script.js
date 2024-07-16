@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const header = document.querySelector('header');
     const leftArrow = document.querySelector(".left-arrow");
     const rightArrow = document.querySelector(".right-arrow");
+    const projectCards = document.querySelectorAll('.project-card');
 
     let isProjectsSectionActive = false;
     let lastScrollTop = 0;
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.addEventListener('scroll', () => {
         const projectsSectionTop = projectsSection.getBoundingClientRect().top;
-        const scrollTop = window.pageXOffset || document.documentElement.scrollTop;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
         if (projectsSectionTop <= 0 && scrollTop > lastScrollTop) {
             isProjectsSectionActive = true;
@@ -110,4 +111,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     leftArrow.addEventListener("click", () => smoothHorizontalScroll(-300));
     rightArrow.addEventListener("click", () => smoothHorizontalScroll(300));
+
+    // New code for project card navigation
+
+    document.querySelectorAll('.project-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const destination = this.href;
+            document.body.classList.remove('fade-in');
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 500);
+        });
+    });
 });

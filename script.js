@@ -1,72 +1,81 @@
-<script src="https://unpkg.com/lenis@1.1.5/dist/lenis.min.js"></script> 
-
 document.addEventListener("DOMContentLoaded", function() {
     document.body.classList.add('fade-in');
     const projectsSection = document.getElementById('projects-section');
     const projectsContainer = document.querySelector(".projects-container");
+    const header = document.querySelector('header');
     const leftArrow = document.querySelector(".left-arrow");
     const rightArrow = document.querySelector(".right-arrow");
+    const projectCards = document.querySelectorAll('.project-card');
+    let isProjectsSectionActive = false;
 
-    if (!projectsContainer) {
-        console.error('Projects container not found');
-        return;
-    }
+    console.log('Projects container scrollWidth:', projectsContainer.scrollWidth);
+    console.log('Projects container clientWidth:', projectsContainer.clientWidth);
 
     const lenis = new Lenis({
         duration: 0.6,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
-        mouseMultiplier: 1,
+        mouseMultiplier: 2,
         smoothTouch: false,
         touchMultiplier: 2,
         infinite: false,
     });
 
-    let reachedEnd = false;
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
     function smoothHorizontalScroll(amount) {
-        console.log('smoothHorizontalScroll called with amount:', amount);
+        if (!projectsContainer) {
+            console.error('projectsContainer not found');
+            return { reachedEnd: false, reachedStart: false };
+        }
 
         const scrollLeft = projectsContainer.scrollLeft;
         const maxScroll = projectsContainer.scrollWidth - projectsContainer.clientWidth;
 
-        console.log('Current scroll state:', { scrollLeft, maxScroll });
+        let newScrollLeft = scrollLeft + amount;
+        newScrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll));
 
-        const newScrollLeft = Math.max(0, Math.min(scrollLeft + amount, maxScroll));
+        projectsContainer.scrollTo({
+            left: newScrollLeft,
+            behavior: 'smooth'
+        });
 
-        console.log('Attempting to scroll to:', newScrollLeft);
+        const reachedEnd = newScrollLeft >= maxScroll - 1;
+        const reachedStart = newScrollLeft <= 1;
 
-        projectsContainer.scrollLeft = newScrollLeft;
-        console.log('New scrollLeft immediately after setting:', projectsContainer.scrollLeft);
-
-        reachedEnd = newScrollLeft === maxScroll && amount > 0;
-
-        console.log('Scroll result:', { newScrollLeft, reachedEnd });
-
-        return reachedEnd;
+        return { reachedEnd, reachedStart };
     }
 
     window.addEventListener('wheel', (e) => {
         const projectsSectionRect = projectsSection.getBoundingClientRect();
-        const isProjectsSectionVisible = projectsSectionRect.top <= 0 && projectsSectionRect.bottom > 0;
+        const isProjectsSectionVisible = projectsSectionRect.top <= 0 && projectsSectionRect.bottom > window.innerHeight;
 
-        console.log('Wheel event:', { isProjectsSectionVisible });
+        if (isProjectsSectionVisible) {
+            if (!isProjectsSectionActive) {
+                isProjectsSectionActive = true;
+                lenis.stop();
+            }
 
-        if (isProjectsSectionVisible && !reachedEnd) {
-            lenis.stop();
-
+            e.preventDefault();
             const scrollAmount = e.deltaY;
-            console.log('Attempting horizontal scroll:', scrollAmount);
-            reachedEnd = smoothHorizontalScroll(scrollAmount);
-            console.log('Horizontal scroll result:', { reachedEnd });
+            const { reachedEnd, reachedStart } = smoothHorizontalScroll(scrollAmount);
 
-        } else {
+            if ((reachedEnd && scrollAmount > 0) || (reachedStart && scrollAmount < 0)) {
+                isProjectsSectionActive = false;
+                lenis.start();
+            }
+        } else if (isProjectsSectionActive) {
+            isProjectsSectionActive = false;
             lenis.start();
         }
     }, { passive: false });
 
-    // New code for project card navigation
     document.querySelectorAll('.project-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -75,6 +84,18 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(() => {
                 window.location.href = destination;
             }, 500);
+        });
+    });
+
+    leftArrow.addEventListener('click', () => smoothHorizontalScroll(-300));
+    rightArrow.addEventListener('click', () => smoothHorizontalScroll(300));
+
+    document.querySelectorAll('.nav-list a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            lenis.scrollTo(targetElement);
         });
     });
 });

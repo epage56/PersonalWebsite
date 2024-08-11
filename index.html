@@ -1,118 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-XXXXXXXX-X');
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXXXXX-X');
+    </script>
 </head>
-<body>
-    <div id="main-content">
-        <div class="container">
-            <header>
-                <nav class="header">
-                    <div class="branding">
-                        <h1>Eli Page <span>Hardware</span></h1>
-                    </div>
-                    <ul class="nav-list">
-                        <li><a href="#Projects">Projects</a></li>
-                        <li><a href="#Info">Info</a></li>
-                        <li><a href="#Lets-Chat">Let's Chat</a></li>
-                    </ul>
-                </nav>
-            </header>
 
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="branding">
+                <a href="#home">Eli Page <span class="hardware">Hardware</span></a>
+            </div>
+            
+            
+            <ul class="nav-list">
+                <li><a href="#Projects">Projects</a></li>
+                <li><a href="#Info">Info</a></li>
+                <li><a href="#Lets-Chat">Let's Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
             <div class="message" style="padding-top: 600px;">
                 My name is Eli, and I like to build things
             </div>
-
             <div class="message" style="padding-bottom: 50px;">
-                Spartanburg - Durham - Atlanta - Durham - Palo Alto - ?
+                Spartanburg - Durham - Atlanta - Durham - Palo Alto
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div id="projects-section">
-        <div id="Projects" class="large-black-box">
-            <div class="sectiontitle">
-                Projects
+        <section id="projects-section">
+            <div id="Projects" class="large-black-box">
+                <h2 class="sectiontitle">Projects</h2>
             </div>
-        </div>
-
-        <div class="projects-showcase">
-            <div class="arrow left-arrow">&#9664;</div> <!-- Left arrow -->
-            <div class="projects-container">
-
-                <div class="card-container">
-                    <a href="BluetoothBikeShifter.html" class="project-link">
-                        <div class="project-card">
-                            <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Bluetooth Bike Shifter">
-                            <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Bluetooth Bike Shifter Hover">
-                        </div>
-                        <div class="caption">Bluetooth Bike Shifter</div>
-                    </a>
-                </div>
-
-                <div class="card-container">
-                    <a href="JorisLaarmanStand.html" class="project-link">
-                        <div class="project-card">
-                            <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Bluetooth Bike Shifter">
-                            <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Bluetooth Bike Shifter Hover">
-                        </div>
-                        <div class="caption">Bluetooth Bike Shifter</div>
-                    </a>
-                </div>
-
-                <div class="card-container">
-                    <div class="project-card">
-                        <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Project 1">
-                        <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Project 1 Hover">
+            <div class="projects-showcase">
+                <div class="arrow left-arrow">&#9664;</div>
+                <div class="projects-container">
+                    <!-- Project cards -->
+                    <div class="card-container">
+                        <a href="bbs.html" class="project-link">
+                            <div class="project-card">
+                                <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Bluetooth Bike Shifter">
+                                <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Bluetooth Bike Shifter Hover">
+                            </div>
+                            <div class="caption">Bluetooth Bike Shifter</div>
+                        </a>
                     </div>
-                    <div class="caption">Bluetooth Bike Shifter</div>
-                </div>
 
-                <div class="card-container">
-                    <div class="project-card">
-                        <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Project 1">
-                        <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Project 1 Hover">
+                    <div class="card-container">
+                        <a href="dh1.html" class="project-link">
+                            <div class="project-card">
+                                <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Bluetooth Bike Shifter">
+                                <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Bluetooth Bike Shifter Hover">
+                            </div>
+                            <div class="caption">Bike Frame Design</div>
+                        </a>
                     </div>
-                    <div class="caption">Bluetooth Bike Shifter</div>
+                    <!-- Repeat for other project cards -->
                 </div>
-
-                <div class="card-container">
-                    <div class="project-card">
-                        <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Project 1">
-                        <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Project 1 Hover">
-                    </div>
-                    <div class="caption">Bluetooth Bike Shifter</div>
-                </div>
-
-                <!-- Repeat for other project cards -->
-
+                <div class="arrow right-arrow">&#9654;</div>
             </div>
-       
-            <div class="arrow right-arrow">&#9654;</div> <!-- Right arrow -->
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <div id="footer-content">
+    <footer id="footer-content">
         <div id="Info" class="large-black-box"></div>
         <div id="Lets-Chat" class="large-black-box"></div>
         <div class="large-black-box"></div>
-        <div class="large-black-box"></div>
-        <div class="large-black-box"></div>
-    </div>
+
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
     <script src="script.js"></script>

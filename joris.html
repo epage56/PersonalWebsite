@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Bike Shifter - Eli Page Hardware</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles directly in the HTML */
+        .hero {
+            padding: 150px 20px;
+            text-align: center;
+            background-color: var(--background-color);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            color: rgb(0, 65, 0);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            font-family: 'ApocRevelations-Regular', sans-serif;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: rgb(0, 25, 0);;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: 32px;
+            color: #000;
+            margin-bottom: 25px;
+            font-family: 'ApocRevelations-Regular', sans-serif;
+        }
+
+        .content-section p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background-color: var(--feature-background);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .video-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .future-improvements {
+            padding: 80px 20px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+
+        .future-improvements h2 {
+            font-size: 32px;
+            color: #0071e3;
+            margin-bottom: 25px;
+            font-family: 'ApocRevelations-Regular', sans-serif;
+        }
+
+        .future-improvements p {
+            font-size: 16px;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="branding">
+                <a href="#home">Eli Page Hardware</a>
+            </div>
+            <ul class="nav-list">
+                <li><a href="index.html#Projects">Projects</a></li>
+                <li><a href="index.html#Info">Info</a></li>
+                <li><a href="index.html#Lets-Chat">Let's Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+        <section class="hero">
+            <h1 class="project-title">VR Remote Stand</h1>
+            <p class="project-description">Holding a remote</p>
+        </section>
+
+        <div class="container1"
+            <div class="project-content">
+                <section class="content-section">
+                    <h2>User Needs Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <h3>Reliable</h3>
+                            <p>If connection dropped, automatically reconnects</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>Responsive</h3>
+                            <p> <0.5s from input to shift </p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>Universal</h3>
+                            <p>Works with all common bicycle drivetrains</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Development Process</h2>
+                    <p>The journey from concept to finished product involved extensive prototyping, rigorous testing, and continuous refinement. We faced challenges in miniaturizing the components and ensuring reliable performance across various riding conditions.</p>
+                </section>
+
+                <div class="video-section">
+                    <video width="640" height="480" controls autoplay loop muted poster="thumbnail.jpg">
+                        <source src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/bolted shifter clamp v2 v36.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video width="640" height="480" controls autoplay loop muted poster="thumbnail.jpg">
+                        <source src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/Actuator Housing v3 v66.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <section class="future-improvements">
+                    <h2>Future Improvements</h2>
+                    <p>We're exploring integration with cycling computers for data analysis, further reducing power consumption, and developing a pro version with advanced features for competitive cyclists.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

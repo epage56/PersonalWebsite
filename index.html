@@ -1,88 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-XXXXXXXX-X');
-    </script>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Personal Portfolio</title>
+        <link rel="stylesheet" href="styles.css" />
+        <!-- Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-X"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "UA-XXXXXXXX-X");
+        </script>
+    </head>
 
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="branding">
-                <a href="#home">Eli Page <span class="hardware">Hardware</span></a>
-            </div>
-            
-            
-            <ul class="nav-list">
-                <li><a href="#Projects">Projects</a></li>
-                <li><a href="#Info">Info</a></li>
-                <li><a href="#Lets-Chat">Let's Chat</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="intro">
-            <div class="message" style="padding-top: 600px;">
-                My name is Eli, and I like to build things
-            </div>
-            <div class="message" style="padding-bottom: 50px;">
-                Spartanburg - Durham - Atlanta - Durham - Palo Alto
-            </div>
-        </section>
-
-        <section id="projects-section">
-            <div id="Projects" class="large-black-box">
-                <h2 class="sectiontitle">Projects</h2>
-            </div>
-            <div class="projects-showcase">
-                <div class="arrow left-arrow">&#9664;</div>
-                <div class="projects-container">
-                    <!-- Project cards -->
-                    <div class="card-container">
-                        <a href="bbs.html" class="project-link">
-                            <div class="project-card">
-                                <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Bluetooth Bike Shifter">
-                                <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Bluetooth Bike Shifter Hover">
-                            </div>
-                            <div class="caption">Bluetooth Bike Shifter</div>
-                        </a>
-                    </div>
-
-                    <div class="card-container">
-                        <a href="dh1.html" class="project-link">
-                            <div class="project-card">
-                                <img class="project-image" src="media/BluetoothBikeShifterCoverPic.webp" alt="Bluetooth Bike Shifter">
-                                <img class="project-hover-image" src="media/Vive Stand/From afar, both sides removed.jpg" alt="Bluetooth Bike Shifter Hover">
-                            </div>
-                            <div class="caption">Bike Frame Design</div>
-                        </a>
-                    </div>
-                    <!-- Repeat for other project cards -->
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <a href="#home">Eli Page</a>
                 </div>
-                <div class="arrow right-arrow">&#9654;</div>
+
+                <ul class="nav-list">
+                    <li><a href="#Projects">Projects</a></li>
+                    <li><a href="#Info">Info</a></li>
+                    <li>
+                        <a
+                            href="https://www.linkedin.com/messaging/compose/?to=elipage"
+                            target="_blank"
+                            id="lets-chat-link"
+                            >Let's Chat</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div id="home" class="headshot-container">
+                <img
+                    src="media/Headshotfull.jpg"
+                    alt="Eli Page Headshot"
+                    class="headshot"
+                />
             </div>
-        </section>
-    </main>
 
-    <footer id="footer-content">
-        <div id="Info" class="large-black-box"></div>
-        <div id="Lets-Chat" class="large-black-box"></div>
-        <div class="large-black-box"></div>
+            <section id="intro">
+                <div class="message" style="padding-top: 600px">
+                    Hi, my name is Eli and I want to change the world.
+                </div>
+                <div class="message" style="padding-bottom: 50px">
+                    Spartanburg - Durham - Atlanta - Durham - Palo Alto
+                </div>
+            </section>
 
-    </footer>
+            <section id="projects-section">
+                <div id="Projects" class="large-black-box">
+                    <h2 class="sectiontitle">Projects</h2>
+                </div>
+                <div class="projects-showcase">
+                    <div class="arrow left-arrow">&#9664;</div>
+                    <div class="projects-container">
+                        <!-- Project cards -->
+                        <div class="card-container">
+                            <a href="bbs.html" class="project-link">
+                                <div class="project-card">
+                                    <img
+                                        class="project-image"
+                                        src="media/bbs/Prototypes/NomadV4wShifterVertical.jpg"
+                                        alt="Bluetooth Bike Shifter"
+                                    />
+                                    <img
+                                        class="project-hover-image"
+                                        src="media/bbs/Prototypes/ShifterUpClose.jpg"
+                                        alt="Bluetooth Bike Shifter Hover"
+                                    />
+                                </div>
+                                <div class="caption">
+                                    Bluetooth Bike Shifter
+                                </div>
+                            </a>
+                        </div>
 
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
-    <script src="script.js"></script>
-</body>
+                        <div class="card-container">
+                            <a href="dh1.html" class="project-link">
+                                <div class="project-card">
+                                    <img
+                                        class="project-image"
+                                        src="media/dh1/dh1BondedProto1.jpg"
+                                        alt="Six Bar Bonded Frame"
+                                    />
+                                    <img
+                                        class="project-hover-image"
+                                        src="media/dh1/MillingRocker copy.jpg"
+                                        alt="Suspension Rocker in Mill"
+                                    />
+                                </div>
+                                <div class="caption">Bike Frame Design</div>
+                            </a>
+                        </div>
+
+                        <div class="card-container">
+                            <a href="joris.html" class="project-link">
+                                <div class="project-card">
+                                    <img
+                                        class="project-image"
+                                        src="media/Vive Stand/Usable Vive Stand angle 1.jpg"
+                                        alt="Vive Stand"
+                                    />
+                                    <img
+                                        class="project-hover-image"
+                                        src="media/Vive Stand/Up Close of Mount.jpg"
+                                        alt="Vive Stand Up Close"
+                                    />
+                                </div>
+                                <div class="caption">VR Headset Stand</div>
+                            </a>
+                        </div>
+
+                        <div class="card-container">
+                            <a
+                                href="FetalHeartCirculation.html"
+                                class="project-link"
+                            >
+                                <div class="project-card">
+                                    <img
+                                        class="project-image"
+                                        src="media/fetalheart/Fetal Heart Circulation Final Poster.jpg"
+                                        alt="Final Poster"
+                                    />
+                                    <img
+                                        class="project-hover-image"
+                                        src="media/fetalheart/FetalHeartModelAssembly.jpg"
+                                        alt="Model Assembly"
+                                    />
+                                </div>
+                                <div class="caption">
+                                    Fetal Heart Circulation Model
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Repeat for other project cards -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer id="footer-content">
+            <div
+                id="Info"
+                class="large-black-box"
+                style="height: clamp(0rem, 0rem, 4rem)"
+            ></div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>

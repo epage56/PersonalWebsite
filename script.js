@@ -2,10 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.classList.add("fade-in");
   const projectsSection = document.getElementById("projects-section");
   const projectsContainer = document.querySelector(".projects-container");
-  const header = document.querySelector("header");
-  const leftArrow = document.querySelector(".left-arrow");
-  const rightArrow = document.querySelector(".right-arrow");
   const projectCards = document.querySelectorAll(".project-card");
+
   let isProjectsSectionActive = false;
 
   console.log("Projects container scrollWidth:", projectsContainer.scrollWidth);
@@ -110,9 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".branding a").forEach((link) => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-      lenis.scrollTo(targetElement);
+      const destination = this.href;
+      document.body.classList.remove("fade-in");
+      setTimeout(() => {
+        window.location.href = destination;
+      }, 500);
     });
   });
 

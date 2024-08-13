@@ -42,8 +42,8 @@ body {
     background: linear-gradient(
         to bottom,
         var(--offwhite) 0px,
-        var(--offwhite) 51.5rem,
-        black 51.5rem,
+        var(--offwhite) 49rem,
+        black 49rem,
         black 100%
     );
     scroll-behavior: smooth;
@@ -71,6 +71,7 @@ body {
     padding-top: 100px;
     font-size: 24px;
     font-weight: 450;
+    color: black;
 }
 
 .large-black-box {
@@ -161,7 +162,7 @@ body {
 .projects-showcase {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 1rem;
     margin-left: -10px;
     overflow: hidden;
 }
@@ -245,4 +246,37 @@ body {
     height: auto;
     border-radius: 0.1rem; /* Slightly rounded corners */
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25); /* Shadow around the image */
+}
+
+.cardfortransition {
+    width: 100%;
+    height: 51.25rem;
+    background-color: var(--offwhite); /* or any other color */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0rem 0rem 2.5rem 2.5rem; /* Top-left, top-right, bottom-right, bottom-left */
+}
+
+.sticky-footer {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.75rem;
+    width: 100%;
+    background-color: transparent; /* Or any other color you prefer */
+    text-align: left;
+    color: var(--offwhite);
+    mix-blend-mode: difference;
+}
+
+.sticky-footer a {
+    text-decoration: none; /* Removes underline */
+    margin: 0 0rem; /* Adds space between links */
+    color: var(--offwhite);
+}
+
+.sticky-footer a :hover {
+    color: var(--grey);
+    transition: opacity 0.5s ease-in-out;
 }

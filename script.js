@@ -5,9 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const projectCards = document.querySelectorAll(".project-card");
 
   let isProjectsSectionActive = false;
-
-  console.log("Projects container scrollWidth:", projectsContainer.scrollWidth);
-  console.log("Projects container clientWidth:", projectsContainer.clientWidth);
+  let lastScrollTop = 0;
 
   const lenis = new Lenis({
     duration: 0.6,
@@ -15,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     direction: "vertical",
     gestureDirection: "vertical",
     smooth: true,
-    mouseMultiplier: 2,
+    mouseMultiplier: 1,
     smoothTouch: false,
     touchMultiplier: 2,
     infinite: false,
@@ -40,10 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let newScrollLeft = scrollLeft + amount;
     newScrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll));
 
-    projectsContainer.scrollTo({
-      left: newScrollLeft,
-      behavior: "smooth",
-    });
+    projectsContainer.scrollLeft = newScrollLeft;
 
     const reachedEnd = newScrollLeft >= maxScroll - 1;
     const reachedStart = newScrollLeft <= 1;
@@ -51,35 +46,39 @@ document.addEventListener("DOMContentLoaded", function () {
     return { reachedEnd, reachedStart };
   }
 
+  function isProjectsSectionInView() {
+    const rect = projectsSection.getBoundingClientRect();
+    return rect.top <= 0 && rect.bottom > window.innerHeight;
+  }
+
+  window.addEventListener("scroll", function () {
+    const currentScrollTop =
+      window.pageYOffset || document.documentElement.scrollTop;
+
+    if (isProjectsSectionInView()) {
+      if (!isProjectsSectionActive) {
+        isProjectsSectionActive = true;
+        lenis.stop();
+        lastScrollTop = currentScrollTop;
+        window.scrollTo(0, lastScrollTop);
+      }
+    } else if (isProjectsSectionActive) {
+      isProjectsSectionActive = false;
+      lenis.start();
+    }
+  });
+
   window.addEventListener(
     "wheel",
-    (e) => {
-      const projectsSectionRect = projectsSection.getBoundingClientRect();
-      const isProjectsSectionVisible =
-        projectsSectionRect.top <= 0 &&
-        projectsSectionRect.bottom > window.innerHeight;
-
-      if (isProjectsSectionVisible) {
-        if (!isProjectsSectionActive) {
-          isProjectsSectionActive = true;
-          lenis.stop();
-        }
-
+    function (e) {
+      if (isProjectsSectionActive) {
         e.preventDefault();
-        const scrollAmount = e.deltaY;
-        const { reachedEnd, reachedStart } =
-          smoothHorizontalScroll(scrollAmount);
+        const { reachedEnd, reachedStart } = smoothHorizontalScroll(e.deltaY);
 
-        if (
-          (reachedEnd && scrollAmount > 0) ||
-          (reachedStart && scrollAmount < 0)
-        ) {
+        if ((reachedEnd && e.deltaY > 0) || (reachedStart && e.deltaY < 0)) {
           isProjectsSectionActive = false;
           lenis.start();
         }
-      } else if (isProjectsSectionActive) {
-        isProjectsSectionActive = false;
-        lenis.start();
       }
     },
     { passive: false },

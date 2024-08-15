@@ -111,8 +111,9 @@ body {
 .branding a {
     text-decoration: none;
     font-weight: 450;
-    font-size: 1rem;
+    font-size: 1 rem;
     color: var(--offwhite);
+    font-family: Satoshi-Variable;
 }
 
 .nav-list {
@@ -147,7 +148,7 @@ body {
     bottom: 0;
     width: 100%;
     height: 0.125rem;
-    background: var(--grey);
+    background: var(--pastelblue);
     transition:
         left 0.2s,
         width 0.2s;
@@ -242,7 +243,7 @@ body {
 }
 
 .headshot {
-    width: 500px; /* Adjust as needed */
+    width: 30rem; /* Adjust as needed */
     height: auto;
     border-radius: 0.1rem; /* Slightly rounded corners */
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25); /* Shadow around the image */

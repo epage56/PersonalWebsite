@@ -40,18 +40,18 @@
                 gap: 2rem;
             }
             .video-description {
+                padding-left: 2rem;
                 flex: 1;
                 max-width: 300px;
             }
             .video-description h2 {
                 font-size: 24px;
-                color: rgb(0, 65, 0);
-                margin-bottom: 1rem;
+                color: white;
                 font-family: "ApocRevelations-Regular", sans-serif;
             }
             .video-description p {
                 font-size: 16px;
-                color: rgb(0, 25, 0);
+                color: white;
                 line-height: 1.5;
             }
             video {
@@ -74,18 +74,47 @@
                 border-radius: 10px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
+
             .bento-box {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 10px;
-                max-width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.25rem;
+                max-width: 900px;
+                margin: 0 auto;
             }
-            .bento-box img {
+
+            .main-image {
+                width: 100%;
+            }
+
+            .main-image img {
                 width: 100%;
                 height: auto;
                 object-fit: cover;
-                border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .sub-images {
+                display: flex;
+                justify-content: space-between;
+                height: 20rem;
+                width: 100%;
+                gap: 1.25rem;
+            }
+
+            .sub-image-left {
+                width: calc(66.67% - 0.75rem);
+            }
+
+            .sub-image-right {
+                width: calc(33.33% - 0.75rem);
+            }
+
+            .sub-image-left img,
+            .sub-image-right img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
         </style>
     </head>
@@ -108,17 +137,6 @@
             <p>Wireless. Reliable. Universal.</p>
         </section>
 
-        <section class="overview-section">
-            <video class="overview-video" controls>
-                <source src="path_to_overview_video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
-            <div class="overview-images">
-                <img src="path_to_overview_image1.jpg" alt="Overview image 1" />
-                <img src="path_to_overview_image2.jpg" alt="Overview image 2" />
-            </div>
-        </section>
-
         <div class="video-section">
             <div class="video-container">
                 <div class="video-description">
@@ -130,7 +148,7 @@
                 </div>
                 <video controls autoplay loop muted playsinline>
                     <source
-                        src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/bolted shifter clamp v2 v36.mp4"
+                        src="/media/bbs/bolted shifter clamp v2 v36.mp4"
                         type="video/mp4"
                     />
                     Your browser does not support the video tag.
@@ -139,7 +157,7 @@
             <div class="video-container">
                 <video controls autoplay loop muted playsinline>
                     <source
-                        src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/Actuator Housing v3 v66.mp4"
+                        src="media/bbs/Actuator Housing v3 v66.mp4"
                         type="video/mp4"
                     />
                     Your browser does not support the video tag.
@@ -154,27 +172,28 @@
             </div>
         </div>
 
-        <section class="product-section">
-            <h2>Remote</h2>
-            <p class="product-description">
-                [Add a paragraph description of the remote here]
-            </p>
-            <div class="bento-box">
+        <div class="bento-box">
+            <div class="main-image">
                 <img
-                    src="media/bbs/Prototypes/ActuatorView.jpg"
-                    alt="Remote image 1"
+                    src="media/bbs/Prototypes/FromGroundNomadWilk.png"
+                    alt="Remote main image"
                 />
-                <img
-                    src="media/bbs/Prototypes/ShifterUpClose.jpg"
-                    alt="Remote image 2"
-                />
-                <img
-                    src="media/bbs/Prototypes/NomadV4wShifterVertical.jpg"
-                    alt="Remote image 3"
-                />
-                <img src="path_to_remote_image4.jpg" alt="Remote image 4" />
             </div>
-        </section>
+            <div class="sub-images">
+                <div class="sub-image-left">
+                    <img
+                        src="media/bbs/Prototypes/ActuatorView.jpg"
+                        alt="Remote image 2"
+                    />
+                </div>
+                <div class="sub-image-right">
+                    <img
+                        src="media/bbs/Prototypes/ShifterUpClose.jpg"
+                        alt="Remote image 3"
+                    />
+                </div>
+            </div>
+        </div>
 
         <section class="product-section">
             <h2>Actuator</h2>

@@ -1,14 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Fade-in effect
   document.body.classList.add("fade-in");
+
+  // Cache frequently accessed elements
   const projectsSection = document.getElementById("projects-section");
   const projectsContainer = document.querySelector(".projects-container");
-  const projectCards = document.querySelectorAll(".project-card");
+  const letsChatLink = document.getElementById("lets-chat-link");
 
   let isProjectsSectionActive = false;
   let lastScrollTop = 0;
 
+  // Initialize Lenis for smooth scrolling
   const lenis = new Lenis({
-    duration: 0.6,
+    duration: 0.5,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     direction: "vertical",
     gestureDirection: "vertical",
@@ -19,10 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
     infinite: false,
   });
 
+  console.log("Lenis instance:", lenis);
+
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
+
   requestAnimationFrame(raf);
 
   function smoothHorizontalScroll(amount) {
@@ -84,9 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
     { passive: false },
   );
 
+  // Fade-out effect for project links
   document.querySelectorAll(".project-link").forEach((link) => {
     link.addEventListener("click", function (e) {
-      e.preventDefault();
       const destination = this.href;
       document.body.classList.remove("fade-in");
       setTimeout(() => {
@@ -95,37 +102,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Smooth scroll for navigation links
   document.querySelectorAll(".nav-list a").forEach((link) => {
     link.addEventListener("click", function (e) {
-      e.preventDefault();
       const targetId = this.getAttribute("href").substring(1);
       const targetElement = document.getElementById(targetId);
       lenis.scrollTo(targetElement);
     });
   });
 
+  // Fade-out effect for branding links
   document.querySelectorAll(".branding a").forEach((link) => {
     link.addEventListener("click", function (e) {
-      e.preventDefault();
       const destination = this.href;
       document.body.classList.remove("fade-in");
       setTimeout(() => {
         window.location.href = destination;
       }, 500);
     });
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    document
-      .getElementById("lets-chat-link")
-      .addEventListener("click", function (e) {
-        e.preventDefault(); // Prevent the default anchor behavior
-
-        // Replace 'your-linkedin-profile-id' with your actual LinkedIn profile ID
-        window.open(
-          "https://www.linkedin.com/messaging/compose/elipage",
-          "_blank",
-        );
-      });
   });
 });

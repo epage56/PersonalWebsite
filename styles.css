@@ -58,6 +58,7 @@ body.fade-in {
 html,
 body {
     min-height: 100%;
+    overflow-x: hidden;
 }
 
 /* Layout */
@@ -72,6 +73,8 @@ body {
     font-size: 24px;
     font-weight: 450;
     color: black;
+    max-width: 32.5%;
+    line-height: 2.5rem;
 }
 
 .large-black-box {
@@ -114,6 +117,11 @@ body {
     font-size: 1 rem;
     color: var(--offwhite);
     font-family: Satoshi-Variable;
+}
+
+.b-subclass {
+    font-weight: 450;
+    font-size: 0.6rem;
 }
 
 .nav-list {
@@ -178,6 +186,7 @@ body {
 
 .projects-container::-webkit-scrollbar {
     display: none;
+    max-width: 100%;
 }
 
 .project-card {
@@ -213,6 +222,7 @@ body {
     display: inline-block;
     flex: 0 0 auto;
     scroll-snap-align: start;
+    max-width: 100%;
 }
 
 .card-container .caption {
@@ -245,13 +255,13 @@ body {
 .headshot {
     width: 30rem; /* Adjust as needed */
     height: auto;
-    border-radius: 0.1rem; /* Slightly rounded corners */
+    border-radius: 0.5rem; /* Slightly rounded corners */
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25); /* Shadow around the image */
 }
 
 .cardfortransition {
-    width: 100%;
-    height: 51.25rem;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--offwhite); /* or any other color */
     box-sizing: border-box;
     display: flex;

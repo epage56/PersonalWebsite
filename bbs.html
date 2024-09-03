@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bluetooth Bike Shifter - Eli Page Hardware</title>
         <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
         <style>
             .hero {
                 padding: 20rem 1rem;
@@ -16,6 +18,11 @@
                 color: rgb(0, 65, 0);
                 margin-bottom: 20px;
                 letter-spacing: -0.5px;
+                font-family: "ApocRevelations-Regular", sans-serif;
+            }
+            .hero h2 {
+                font-size: 32px;
+                color: white;
                 font-family: "ApocRevelations-Regular", sans-serif;
             }
             .hero p {
@@ -122,16 +129,69 @@
                 padding-right: 10%;
                 background-color: black;
                 padding-top: 5vh;
+                text-align: center; /* Add this line */
             }
-            #problem h2 {
-                font-size: 28px;
+
+            #problem h1 {
+                font-family: "ApocRevelations-Regular", sans-serif;
+                font-weight: 850;
+                font-size: 56px;
                 margin-bottom: 1rem;
                 color: var(--offwhite);
+                margin-left: auto; /* Add this line */
+                margin-right: auto; /* Add this line */
             }
+
             #problem p {
-                font-size: 18px;
+                font-size: 20px;
                 color: white;
                 line-height: 1.6;
+                margin-left: auto; /* Add this line */
+                margin-right: auto; /* Add this line */
+                max-width: 80%; /* Optional: adjust the width to your liking */
+            }
+            #userneeds {
+                padding-left: 10%;
+                padding-right: 10%;
+                background-color: black;
+                padding-top: 5vh;
+            }
+
+            #userneeds .user-needs-items {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            #userneeds .item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 1rem;
+            }
+
+            #userneeds .item img {
+                width: 50px; /* adjust the value to set the image width */
+                height: 50px; /* adjust the value to set the image height */
+                margin-bottom: 10px; /* add some space between the image and text */
+            }
+
+            #userneeds p {
+                font-size: 20px;
+                color: white;
+                line-height: 1.6;
+            }
+
+            #userneeds h1 {
+                font-family: "ApocRevelations-Regular", sans-serif;
+                font-weight: 850;
+                font-size: 56px;
+                margin-bottom: 1rem;
+                color: var(--offwhite);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 2rem;
             }
         </style>
     </head>
@@ -154,20 +214,102 @@
             <p>Wireless. Reliable. Universal.</p>
         </section>
 
+        <section id="The Basics">
+            <div class="main-image" style="margin-top: -2rem; padding-top: 0">
+                <img
+                    src="media/bbs/Bluetooth Bike Shifter Explanation.png"
+                    style="
+                        border-bottom-left-radius: 5rem;
+                        border-bottom-right-radius: 5rem;
+                    "
+                />
+            </div>
+        </section>
+
         <section id="problem">
-            <h2>Problem</h2>
+            <h1>The Problem</h1>
             <p>
-                In today's digital landscape, users expect smooth and engaging
-                interactions on websites. However, many websites struggle with
-                providing seamless scrolling experiences, especially when
-                handling complex layouts or custom scroll behaviors. This often
-                results in janky or inconsistent scroll behavior, which can
-                detract from the user experience. Our goal is to address these
-                issues by implementing a smooth and responsive scrolling
-                solution that enhances user engagement and interaction without
-                compromising performance.
+                Mechanical shifting systems are only compatible with one gear
+                configuration (1x12 for example)
+            </p>
+            <p>
+                Shift distance between specific gears cannot be adjusted with a
+                mechanical system
+            </p>
+            <p>
+                Mechanical shifters are not aesthetically pleasing; there is a
+                large cable crossing over in front of the bike
+            </p>
+            <p>
+                Existing wireless shifters are VERY expensive ($1500+) and are
+                vulnerable to impacts
             </p>
         </section>
+
+        <section>
+            <div
+                class="main-image"
+                style="
+                    padding-top: 5rem;
+                    padding-bottom: 2rem;
+                    margin: 0rem;
+                    text-align: center;
+                "
+            >
+                <img
+                    src="media/largewhitearrow.png"
+                    style="max-width: 15rem; transform: rotate(180deg)"
+                />
+            </div>
+        </section>
+
+        <section id="userneeds">
+            <h1>User Needs</h1>
+            <div class="user-needs-items">
+                <div class="item">
+                    <img src="media/icons/pptbikeicon.png" alt="Universal" />
+                    <p>Universal</p>
+                </div>
+                <div class="item">
+                    <img src="media/icons/pptdurableicon.png" alt="Durable" />
+                    <p>Durable</p>
+                </div>
+                <div class="item">
+                    <img src="media/icons/pptreliableicon.png" alt="Reliable" />
+                    <p>Reliable</p>
+                </div>
+                <div class="item">
+                    <img
+                        src="media/icons/pptremoteicon.png"
+                        alt="Easy to Use"
+                    />
+                    <p>Easy to Use</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="bento-box">
+            <div class="main-image">
+                <img
+                    src="media/bbs/Prototypes/FromGroundNomadWilk.png"
+                    alt="Remote main image"
+                />
+            </div>
+            <div class="sub-images">
+                <div class="sub-image-left">
+                    <img
+                        src="media/bbs/Prototypes/ActuatorView.jpg"
+                        alt="Remote image 2"
+                    />
+                </div>
+                <div class="sub-image-right">
+                    <img
+                        src="media/bbs/Prototypes/ShifterUpClose.jpg"
+                        alt="Remote image 3"
+                    />
+                </div>
+            </div>
+        </div>
 
         <div class="video-section">
             <div class="video-container">
@@ -204,29 +346,6 @@
             </div>
         </div>
 
-        <div class="bento-box">
-            <div class="main-image">
-                <img
-                    src="media/bbs/Prototypes/FromGroundNomadWilk.png"
-                    alt="Remote main image"
-                />
-            </div>
-            <div class="sub-images">
-                <div class="sub-image-left">
-                    <img
-                        src="media/bbs/Prototypes/ActuatorView.jpg"
-                        alt="Remote image 2"
-                    />
-                </div>
-                <div class="sub-image-right">
-                    <img
-                        src="media/bbs/Prototypes/ShifterUpClose.jpg"
-                        alt="Remote image 3"
-                    />
-                </div>
-            </div>
-        </div>
-
         <section class="product-section">
             <h2>Actuator</h2>
             <p class="product-description">
@@ -239,8 +358,5 @@
                 <img src="path_to_actuator_image4.jpg" alt="Actuator image 4" />
             </div>
         </section>
-
-        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
-        <script src="script.js"></script>
     </body>
 </html>

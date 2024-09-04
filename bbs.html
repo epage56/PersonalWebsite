@@ -54,7 +54,7 @@
             }
 
             .hero {
-                padding: 20rem 1rem;
+                padding: 40vh 5%;
                 background-color: var(--background-color);
             }
 
@@ -139,13 +139,28 @@
                 margin-bottom: 0.5rem;
                 line-height: 1.5;
             }
+
+            .image-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px; /* Adjust the gap between images */
+            }
+
+            .image-list img {
+                height: 25rem;
+                width: 35rem;
+                object-fit: cover;
+                margin: 0; /* Remove any default margin */
+                padding: 0; /* Remove any default padding */
+            }
         </style>
     </head>
     <body>
         <header>
             <nav class="navbar">
                 <div class="branding">
-                    <a href="index.html">Eli Page </a>
+                    <a href="index.html">Eli Page</a>
                 </div>
                 <ul class="nav-list">
                     <li><a href="index.html#Projects">Projects</a></li>
@@ -156,31 +171,32 @@
         </header>
 
         <section class="hero">
-            <h1 style="color: rgb(0, 65, 0);">Bluetooth Bike Shifter</h1>
-            <p style="color: rgb(0, 65, 0);">Wireless. Reliable. Universal.</p>
+            <h1 style="color: rgb(0, 65, 0)">Bluetooth Bike Shifter</h1>
+            <p style="color: rgb(0, 65, 0)">Wireless. Reliable. Universal.</p>
         </section>
 
-        <section class="basics">
-            <div class="main-image"></div>
-                <img
-                    src="media/bbs/Bluetooth Bike Shifter Explanation.png"
-                    style="
-                        margin-top: -1rem;
-                        border-radius: 0px;
-                        padding-top: 0;
-                        height: 100vh;
-                        border-bottom-left-radius: 5rem;
-                        border-bottom-right-radius: 5rem;
-                    "
-                />
-            </div>
+        <section>
+            <img
+                src="media/bbs/Bluetooth Bike Shifter Explanation.png"
+                style="
+                    margin-top: -2rem;
+                    padding-top: 0;
+                    border-radius: 0px;
+                    height: 100vh;
+                    width: 100vw;
+                    object-fit: cover;
+                    border-bottom-left-radius: 10vh;
+                    border-bottom-right-radius: 10vh;
+                "
+                alt="Bluetooth Bike Shifter Explanation"
+            />
         </section>
 
         <section class="problem">
             <h1>The Problem</h1>
             <p>
-                Existing wireless shifters are VERY expensive ($1500+) and inherently
-                vulnerable to impacts.
+                Existing wireless shifters are VERY expensive ($1500+) and
+                inherently vulnerable to impacts.
             </p>
             <p>
                 Mechanical shifting systems are only compatible with one gear
@@ -190,26 +206,15 @@
                 Shift distance between specific gears cannot be adjusted with a
                 mechanical system.
             </p>
-            <p>
-                Mechanical shift cables are ugly.
-            </p>
+            <p>Mechanical shift cables are ugly.</p>
         </section>
 
-        <section>
-            <div
-                class="main-image"
-                style="
-                    padding-top: 5rem;
-                    padding-bottom: 2rem;
-                    margin: 0rem;
-                    text-align: center;
-                "
-            >
-                <img
-                    src="media/largewhitearrow.png"
-                    style="width: 15rem; transform: rotate(180deg)"
-                />
-            </div>
+        <section style="text-align: center; padding: 5rem 0">
+            <img
+                src="media/largewhitearrow.png"
+                style="width: 15rem; transform: rotate(180deg)"
+                alt="Arrow Down"
+            />
         </section>
 
         <section class="user-needs">
@@ -240,7 +245,10 @@
                     </ul>
                 </div>
                 <div class="user-needs-item">
-                    <img src="media/icons/pptremoteicon.png" alt="Easy to Use" />
+                    <img
+                        src="media/icons/pptremoteicon.png"
+                        alt="Easy to Use"
+                    />
                     <p>Easy to Use</p>
                     <ul>
                         <li>Simple, intuitive interface</li>
@@ -250,22 +258,83 @@
             </div>
         </section>
 
-        <section id="prototypes" style="position: relative; padding-left: 10vw;">
+        <section
+            id="prototypes"
+            style="display: flex; justify-content: center; align-items: center"
+        >
             <div class="bento-box">
                 <div class="video-section">
                     <div class="video-container">
                         <video controls autoplay loop muted playsinline>
-                          <source src="media/bbs/Prototypes/Short first test bluetooth bike shifter .mp4" type="video/mp4">
-                          Your browser does not support the video tag.
+                            <source
+                                src="media/bbs/Prototypes/Short first test bluetooth bike shifter .mp4"
+                                type="video/mp4"
+                            />
+                            Your browser does not support the video tag.
                         </video>
-                        <div class="video-description">
-                            <h2>Drive by Wire</h2>
+                        <div
+                            class="video-description"
+                            style="padding-top: 7.5vh"
+                        >
+                            <h1>Drive by Wire Prototype</h1>
                             <p>
-                                Before going wireless it was critical to test my theory that both the maximum force and backdrive force were enough to properly shift gears.
+                                Is a linear actuator strong and fast enough to
+                                deliver responsive shifting under load?
+                            </p>
+                            <p>
+                                Is the backdrive friction actually strong enough
+                                to hold its position under load?
                             </p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section>
+            <h1 style="text-align: left; padding-left: 10%">Bluetooth</h1>
+            <p>
+                Originally, I started with a model HC-05 Bluetooth module, which
+                continuously transmits data. After connecting two modules and
+                two Arduino microcontrollers, I realized that the wiring was
+                overly complex, the system I realized that the wiring was overly
+                complex, the system was unnecessarily bulky, and the continuous
+                transmission of data was wasteful considering shifts were
+                infrequent and random. From there, I decided to switch to an
+                Arduino Nano 33 BLE Sense microcontroller, which has integrated
+                low energy Bluetooth. This more modern connection is perfect for
+                the infrequent shifts and small size.
+            </p>
+            <div class="images">
+                <div class="image-list">
+                    <img
+                        src="media/bbs/Prototypes/MessyBLUEdesk.webp"
+                        alt="Bluetooth Module Image 1"
+                    />
+                    <img
+                        src="media/bbs/Prototypes/Messybluedesk2.webp"
+                        alt="Bluetooth Module Image 2"
+                    />
+                </div>
+            </div>
+            <div style="text-align: center">
+                <img
+                    src="media/largewhitearrow.png"
+                    style="
+                        width: 15rem;
+                        transform: rotate(180deg);
+                        margin: 0 auto;
+                        padding: 5vh;
+                    "
+                    alt="Arrow Down"
+                />
+            </div>
+            <div style="text-align: center">
+                <object
+                    data="media/bbs/Icons/Arduino Nano Ble 33.svg"
+                    type="image/svg+xml"
+                    style="width: 25rem; height: auto; margin: 0 auto"
+                ></object>
             </div>
         </section>
 
@@ -280,7 +349,7 @@
                 </div>
                 <video controls autoplay loop muted playsinline>
                     <source
-                        src="/media/bbs/bolted shifter clamp v2 v36.mp4"
+                        src="media/bbs/bolted shifter clamp v2 v36.mp4"
                         type="video/mp4"
                     />
                     Your browser does not support the video tag.
@@ -327,11 +396,19 @@
             </div>
         </div>
 
-        <section style="margin-top: 5rem; background-color: white; border-radius: 1rem;">
+        <section
+            style="
+                margin-top: 5rem;
+                background-color: white;
+                border-radius: 1rem;
+            "
+        >
             <h2>Control Scheme</h2>
-            <img src="media/bbs/ControlBlockDiagram.png" alt="Control Scheme Image" style="width: 100%; height: auto;">
+            <img
+                src="media/bbs/ControlBlockDiagram.png"
+                alt="Control Scheme Image"
+                style="width: 100%; height: auto"
+            />
         </section>
-
-
     </body>
 </html>

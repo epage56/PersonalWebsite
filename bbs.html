@@ -8,6 +8,18 @@
         <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
         <script src="script.js"></script>
         <style>
+            :root {
+                /* Colors */
+                --pastelblue: #87a7b4;
+                --dukerduke: #004cff;
+                --pastelyellow: #ffc107;
+                --offwhite: #f5f4f3;
+                --grey: #383838;
+                --black: #000000;
+                --white: #ffffff;
+                --bbsgreen: #000033;
+            }
+
             body {
                 margin: 0;
                 padding: 0;
@@ -15,10 +27,25 @@
                 background: linear-gradient(
                     to bottom,
                     var(--offwhite) 0px,
-                    var(--offwhite) 101vh,
-                    black 101vh,
-                    black 100%
+                    var(--offwhite) 100vh,
+                    black 100vh,
+                    black 320rem,
+
+                    rgba(0, 0, 0, 0.9) 330rem,
+                    rgba(0, 0, 0, 0.8) 340rem,
+                    rgba(0, 0, 0, 0.7) 350rem,
+                    rgba(0, 0, 0, 0.6) 360rem,
+                    rgba(0, 0, 0, 0.5) 370rem,
+                    rgba(0, 0, 0, 0.4) 380rem,
+                    rgba(0, 0, 0, 0.3) 390rem,
+                    rgba(0, 0, 0, 0.2) 400rem,
+                    rgba(0, 0, 0, 0.1) 410rem,
+                    /* Solid white start */ rgba(255, 255, 255, 1) 430rem,
+                    /* Solid white extends to 450rem */ var(--offwhite) 1000rem,
+                    /* Ensure continuity */ var(--offwhite) 100%
+                        /* Ensure continuity */
                 );
+                min-height: 100vh;
                 scroll-behavior: smooth;
                 opacity: 0;
                 transition: opacity 0.5s ease-in-out;
@@ -142,16 +169,20 @@
 
             .image-list {
                 display: flex;
-                flex-wrap: wrap;
+                flex-wrap: no-wrap; /* Prevents images from wrapping to a new line */
                 justify-content: center;
-                gap: 1rem; /* Adjust the gap between images */
+                gap: 1rem;
+                padding-left: 15rem;
+                padding-right: 15rem;
+                padding-bottom: 1rem;
             }
 
             .image-list img {
-                width: 22.5rem;
+                width: calc(
+                    33.33% - 0.67rem
+                ); /* Adjusts width to account for gap */
                 object-fit: cover;
-                margin: 0; /* Remove any default margin */
-                padding: 0; /* Remove any default padding */
+                margin: 0;
             }
 
             .images .image-list {
@@ -159,11 +190,15 @@
             }
 
             .images .image-list img:first-child {
-                flex-basis: 45%;
+                flex-basis: 40%; /* Adjusted to accommodate three images */
+            }
+
+            .images .image-list img:nth-child(2) {
+                flex-basis: 30%; /* Added styles for the middle image */
             }
 
             .images .image-list img:last-child {
-                flex-basis: 20%;
+                flex-basis: 30%; /* Adjusted to match the middle image */
             }
 
             .image-grid {
@@ -433,7 +468,14 @@
         </section>
 
         <section>
-            <h1 style="text-align: left; padding-left: 15%; padding-right: 15%">
+            <h1
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    color: rgb(0, 65, 0);
+                "
+            >
                 The Actuator
             </h1>
             <p
@@ -443,12 +485,31 @@
                     padding-right: 15%;
                     font-size: 14pt;
                     padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
                 "
             >
                 First, I designed 3 different housing closure types: snap fit,
                 press fit, and a bolted version. I ended up choosing the bolted
-                version because it was more secure and easiest to disassemble.
+                version because it was easier to manufacture and more secure.
             </p>
+
+            <div class="images">
+                <div class="image-list">
+                    <img
+                        src="media/bbs/Prototypes/MessyBLUEdesk.webp"
+                        alt="Bluetooth Module Image 1"
+                    />
+                    <img
+                        src="media/bbs/Prototypes/Messybluedesk2.webp"
+                        alt="Bluetooth Module Image 2"
+                    />
+                    <img
+                        src="media/bbs/remotestuff/IMG_5674.HEIC"
+                        alt="Bluetooth Module Image 3"
+                    />
+                </div>
+            </div>
+
             <div class="image-grid">
                 <img
                     src="media/bbs/remotestuff/IMG_5674.HEIC"
@@ -491,6 +552,7 @@
                     padding-right: 15%;
                     font-size: 14pt;
                     padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
                 "
             >
                 To shorten the length of the actuator and cable attachment, I
@@ -505,6 +567,7 @@
                     padding-right: 15%;
                     font-size: 14pt;
                     padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
                 "
             >
                 After receiving design feedback from an upperclassmen

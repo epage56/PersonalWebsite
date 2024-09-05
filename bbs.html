@@ -144,15 +144,41 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 10px; /* Adjust the gap between images */
+                gap: 1rem; /* Adjust the gap between images */
             }
 
             .image-list img {
-                height: 25rem;
-                width: 35rem;
+                width: 22.5rem;
                 object-fit: cover;
                 margin: 0; /* Remove any default margin */
                 padding: 0; /* Remove any default padding */
+            }
+
+            .images .image-list {
+                display: flex;
+            }
+
+            .images .image-list img:first-child {
+                flex-basis: 45%;
+            }
+
+            .images .image-list img:last-child {
+                flex-basis: 20%;
+            }
+
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 25rem);
+                gap: 1rem;
+                margin: 0 auto;
+                max-width: calc(25rem * 2 + 1rem);
+            }
+
+            .image-grid img {
+                border-radius: 5px; /* Less aggressive rounding */
+                width: 100%;
+                height: auto;
+                object-fit: cover;
             }
         </style>
     </head>
@@ -292,8 +318,18 @@
         </section>
 
         <section>
-            <h1 style="text-align: left; padding-left: 10%">Bluetooth</h1>
-            <p>
+            <h1 style="text-align: left; padding-left: 15%; padding-right: 15%">
+                Bluetooth?
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                "
+            >
                 Originally, I started with a model HC-05 Bluetooth module, which
                 continuously transmits data. After connecting two modules and
                 two Arduino microcontrollers, I realized that the wiring was
@@ -336,6 +372,150 @@
                     style="width: 25rem; height: auto; margin: 0 auto"
                 ></object>
             </div>
+        </section>
+
+        <section>
+            <h1 style="text-align: left; padding-left: 15%; padding-right: 15%">
+                The Remote
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                "
+            >
+                Any good shifter needs to be ergonomic enough for the user to
+                keep one finger on the brake lever and their thumb on the
+                shifter. I settled on a joystick to accomplish this and give the
+                shifter a fun feel. The original clamp made of two half circles
+                was replaced by a one piece clamp cut from 6061 aluminum. The
+                shifter also originally used two 2032 coin cell batteries, but I
+                decided to power it with one of the same Li-ion batteries used
+                in the receiver.
+            </p>
+            <div class="image-grid">
+                <img
+                    src="media/bbs/remotestuff/IMG_5674.HEIC"
+                    alt="Bluetooth Module Image 1"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5721.HEIC"
+                    alt="Bluetooth Module Image 2"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5722.HEIC"
+                    alt="Bluetooth Module Image 3"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5723.HEIC"
+                    alt="Bluetooth Module Image 4"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5724.HEIC"
+                    alt="Bluetooth Module Image 5"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5726.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5727.HEIC"
+                    alt="Bluetooth Module Image 7"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5728.HEIC"
+                    alt="Bluetooth Module Image 8"
+                />
+            </div>
+        </section>
+
+        <section>
+            <h1 style="text-align: left; padding-left: 15%; padding-right: 15%">
+                The Actuator
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                "
+            >
+                First, I designed 3 different housing closure types: snap fit,
+                press fit, and a bolted version. I ended up choosing the bolted
+                version because it was more secure and easiest to disassemble.
+            </p>
+            <div class="image-grid">
+                <img
+                    src="media/bbs/remotestuff/IMG_5674.HEIC"
+                    alt="Bluetooth Module Image 1"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5721.HEIC"
+                    alt="Bluetooth Module Image 2"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5722.HEIC"
+                    alt="Bluetooth Module Image 3"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5723.HEIC"
+                    alt="Bluetooth Module Image 4"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5724.HEIC"
+                    alt="Bluetooth Module Image 5"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5726.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5727.HEIC"
+                    alt="Bluetooth Module Image 7"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5728.HEIC"
+                    alt="Bluetooth Module Image 8"
+                />
+            </div>
+
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                "
+            >
+                To shorten the length of the actuator and cable attachment, I
+                designed and machined a set screw rather than machining or 3D
+                printing a more complex assembly.
+            </p>
+
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                "
+            >
+                After receiving design feedback from an upperclassmen
+                engineering student, I decided to make the seal area smaller by
+                doing a major housing re-design. With the redesign I also
+                decided to include functionality for a seat dropper post
+                control, which involved adding another actuator. A key element
+                of this design is the actuator harness. It organizes the wiring,
+                holds the actuators in place, and provides a place for the
+                Arduino Nano to be mounted.
+            </p>
         </section>
 
         <div class="video-section">

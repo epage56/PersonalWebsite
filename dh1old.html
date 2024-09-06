@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bike Frame Development - Eli Page Hardware</title>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            /* Additional styles directly in the HTML */
+            .hero {
+                padding: 150px 20px;
+                text-align: center;
+                background-color: var(--offwhite);
+            }
+
+            .hero h1 {
+                font-size: var(--H1);
+                color: var(--black);
+                margin-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: var(--subheading);
+                color: var(--grey);
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .content-section {
+                padding: 80px 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .content-section h2 {
+                font-size: var(--H2);
+                color: var(--black);
+                text-align: left;
+                margin-bottom: 40px;
+            }
+
+            .content-section p {
+                font-size: var(--paragraph);
+                color: var(--grey);
+                line-height: 1.8;
+                margin-bottom: 20px;
+            }
+
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 40px;
+                margin-top: 40px;
+            }
+
+            .feature-item {
+                padding: 20px;
+                background-color: var(--offwhite);
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .feature-item h3 {
+                font-size: var(--H3);
+                color: var(--dukerduke);
+                margin-bottom: 10px;
+            }
+
+            .feature-item p {
+                font-size: var(--paragraph);
+                color: var(--grey);
+            }
+
+            .video-section {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                margin-top: 60px;
+            }
+
+            .future-improvements {
+                background-color: var(--black);
+                color: var(--offwhite);
+                padding: 80px 20px;
+                text-align: center;
+            }
+
+            .future-improvements h2 {
+                font-size: var(--H2);
+                color: var(--pastelyellow);
+            }
+
+            .future-improvements p {
+                font-size: var(--paragraph);
+                color: var(--offwhite);
+                max-width: 800px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <a href="index.html">Eli Page </a>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html#Projects">Projects</a></li>
+                    <li><a href="index.html#Info">Info</a></li>
+                    <li><a href="index.html#Lets-Chat">Let's Chat</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>dh1</h1>
+            <p>The perfect full suspension mountain bike.</p>
+        </section>
+
+        <section id="user-needs" class="content-section">
+            <h2>User Needs</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Fun</h3>
+                    <p>
+                        The bike must feel poppy when you want it to, but
+                        planted everywhere else.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <h3>Fast</h3>
+                    <p>The bike must blow you away with its speed.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>"Sick"</h3>
+                    <p>The bike must look and feel "sick".</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="development-process" class="content-section">
+            <h2>Development Process</h2>
+            <p>It all starts with geometry.</p>
+            <div class="video-section">
+                <video
+                    width="640"
+                    height="480"
+                    controls
+                    autoplay
+                    loop
+                    muted
+                    poster="thumbnail.jpg"
+                >
+                    <source
+                        src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/bolted shifter clamp v2 v36.mp4"
+                        type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                </video>
+                <video
+                    width="640"
+                    height="480"
+                    controls
+                    autoplay
+                    loop
+                    muted
+                    poster="thumbnail.jpg"
+                >
+                    <source
+                        src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/Actuator Housing v3 v66.mp4"
+                        type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section id="future-improvements" class="future-improvements">
+            <h2>Future Improvements</h2>
+            <p>
+                We're exploring integration with cycling computers for data
+                analysis, further reducing power consumption, and developing a
+                pro version with advanced features for competitive cyclists.
+            </p>
+        </section>
+
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -3,99 +3,223 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bike Frame Development - Eli Page Hardware</title>
+        <title>Bluetooth Bike Shifter - Eli Page Hardware</title>
         <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
         <style>
-            /* Additional styles directly in the HTML */
-            .hero {
-                padding: 150px 20px;
+            :root {
+                /* Colors */
+                --pastelblue: #87a7b4;
+                --dukerduke: #004cff;
+                --pastelyellow: #ffc107;
+                --offwhite: #f5f4f3;
+                --grey: #383838;
+                --black: #000000;
+                --white: #ffffff;
+                --bbsgreen: #000033;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Satoshi-Variable", sans-serif;
+                background: linear-gradient(
+                    to bottom,
+                    var(--offwhite) 0px,
+                    var(--offwhite) 100vh
+                );
+                min-height: 100vh;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            h1,
+            h2,
+            p {
+                margin-left: auto;
+                margin-right: auto;
                 text-align: center;
-                background-color: var(--offwhite);
+                color: var(--offwhite);
+                font-family: "Satoshi-Variable", sans-serif;
             }
 
-            .hero h1 {
-                font-size: var(--H1);
-                color: var(--black);
-                margin-bottom: 20px;
+            h1 {
+                font-weight: 850;
+                font-size: 56px;
+                margin-bottom: 1rem;
             }
 
-            .hero p {
-                font-size: var(--subheading);
-                color: var(--grey);
-                max-width: 800px;
-                margin: 0 auto;
+            h2 {
+                font-size: 32px;
+                color: white;
             }
 
-            .content-section {
-                padding: 80px 20px;
-                max-width: 1200px;
-                margin: 0 auto;
+            p {
+                font-family: "Satoshi-Variable";
+                font-size: 20px;
+                color: white;
+                line-height: 1.6;
+                max-width: 80%;
             }
 
-            .content-section h2 {
-                font-size: var(--H2);
-                color: var(--black);
-                text-align: left;
-                margin-bottom: 40px;
+            .hero {
+                padding: 20vh 5% 10vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
             }
 
-            .content-section p {
-                font-size: var(--paragraph);
-                color: var(--grey);
-                line-height: 1.8;
-                margin-bottom: 20px;
+            .hero img {
+                width: 70%;
+                max-width: 800px; /* Adjust this value as needed */
+                height: auto;
+                margin-top: 2rem; /* Adds some space between the text and the image */
             }
 
-            .feature-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 40px;
-                margin-top: 40px;
+            .video-section,
+            .bento-box {
+                display: flex;
+                flex-direction: column;
+                gap: 5rem;
+                margin-top: 5rem;
+                margin-bottom: 5rem;
             }
 
-            .feature-item {
-                padding: 20px;
-                background-color: var(--offwhite);
-                border-radius: 15px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            .video-container,
+            .sub-images {
+                display: flex;
+                justify-content: space-between;
+                gap: 2rem;
             }
 
-            .feature-item h3 {
-                font-size: var(--H3);
-                color: var(--dukerduke);
+            .video-description {
+                padding-left: 2rem;
+                flex: 1;
+                max-width: 300px;
+            }
+
+            video {
+                height: 90vh;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .sub-image-left,
+            .sub-image-right {
+                width: calc(66.67% - 0.75rem);
+            }
+
+            .sub-image-right {
+                width: calc(33.33% - 0.75rem);
+            }
+
+            .problem,
+            .user-needs {
+                padding: 5vh 10%;
+                background-color: black;
+            }
+
+            .user-needs-items {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .user-needs-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 1rem;
+            }
+
+            .user-needs-item img {
+                width: 50px;
+                height: 50px;
                 margin-bottom: 10px;
             }
 
-            .feature-item p {
-                font-size: var(--paragraph);
-                color: var(--grey);
+            .user-needs ul {
+                list-style-type: disc;
+                color: white;
+                font-size: 16px;
+                padding-left: 1.5rem;
+                margin-top: 0.5rem;
             }
 
-            .video-section {
+            .user-needs li {
+                margin-bottom: 0.5rem;
+                line-height: 1.5;
+            }
+
+            .image-list {
                 display: flex;
-                flex-direction: column;
-                gap: 20px;
-                align-items: center;
-                margin-top: 60px;
+                flex-wrap: no-wrap; /* Prevents images from wrapping to a new line */
+                justify-content: center;
+                gap: 1rem;
+                padding-left: 15rem;
+                padding-right: 15rem;
+                padding-bottom: 1rem;
             }
 
-            .future-improvements {
-                background-color: var(--black);
-                color: var(--offwhite);
-                padding: 80px 20px;
-                text-align: center;
+            .image-list img {
+                width: calc(
+                    33.33% - 0.67rem
+                ); /* Adjusts width to account for gap */
+                object-fit: cover;
+                margin: 0;
             }
 
-            .future-improvements h2 {
-                font-size: var(--H2);
-                color: var(--pastelyellow);
+            .images .image-list {
+                display: flex;
             }
 
-            .future-improvements p {
-                font-size: var(--paragraph);
-                color: var(--offwhite);
-                max-width: 800px;
+            .images .image-list img:first-child {
+                flex-basis: 40%; /* Adjusted to accommodate three images */
+            }
+
+            .images .image-list img:nth-child(2) {
+                flex-basis: 30%; /* Added styles for the middle image */
+            }
+
+            .images .image-list img:last-child {
+                flex-basis: 30%; /* Adjusted to match the middle image */
+            }
+
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 25rem);
+                gap: 1rem;
                 margin: 0 auto;
+                max-width: calc(25rem * 2 + 1rem);
+            }
+
+            .image-grid img {
+                border-radius: 5px; /* Less aggressive rounding */
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+
+            .video-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+            .video-wrapper video {
+                max-width: 100%;
+                height: auto;
             }
         </style>
     </head>
@@ -103,7 +227,7 @@
         <header>
             <nav class="navbar">
                 <div class="branding">
-                    <a href="index.html">Eli Page </a>
+                    <a href="index.html">Eli Page</a>
                 </div>
                 <ul class="nav-list">
                     <li><a href="index.html#Projects">Projects</a></li>
@@ -114,78 +238,505 @@
         </header>
 
         <section class="hero">
-            <h1>dh1</h1>
-            <p>The perfect full suspension mountain bike.</p>
+            <h1 style="color: rgb(0, 65, 0)">dh1</h1>
+            <p style="color: rgb(0, 65, 0)">
+                The perfect full suspension mountain bike
+            </p>
+            <img
+                style="40vh 5%;"
+                src="media/dh1/Six-bar-Chains-01.jpg"
+                alt="Six-bar Chains"
+            />
         </section>
 
-        <section id="user-needs" class="content-section">
-            <h2>User Needs</h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3>Fun</h3>
-                    <p>
-                        The bike must feel poppy when you want it to, but
-                        planted everywhere else.
-                    </p>
+        <section>
+            <h1
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    color: var(--black);
+                "
+            >
+                The Algorithm
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: var(--black);
+                "
+            >
+                The goal of this project is to develop a novel mechanism
+                synthesis algorithm and apply it to something I know well -
+                vehicle dynamics of bikes. This project is an independent
+                research study advised by Dr. Rebecca Simmons and the Thomas
+                Lord Department of Mechanical Engineering and Material Science
+                at Duke University.
+            </p>
+            <div class="images">
+                <div class="image-list">
+                    <img
+                        src="media/bbs/Prototypes/MessyBLUEdesk.webp"
+                        alt="Bluetooth Module Image 1"
+                    />
+                    <img
+                        src="media/bbs/Prototypes/Messybluedesk2.webp"
+                        alt="Bluetooth Module Image 2"
+                    />
                 </div>
-                <div class="feature-item">
-                    <h3>Fast</h3>
-                    <p>The bike must blow you away with its speed.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>"Sick"</h3>
-                    <p>The bike must look and feel "sick".</p>
-                </div>
+            </div>
+            <div style="text-align: center">
+                <img
+                    src="media/largewhitearrow.png"
+                    style="
+                        width: 15rem;
+                        transform: rotate(180deg);
+                        margin: 0 auto;
+                        padding: 5vh;
+                    "
+                    alt="Arrow Down"
+                />
+            </div>
+            <div style="text-align: center">
+                <object
+                    data="media/bbs/Icons/Arduino Nano Ble 33.svg"
+                    type="image/svg+xml"
+                    style="width: 25rem; height: auto; margin: 0 auto"
+                ></object>
             </div>
         </section>
 
-        <section id="development-process" class="content-section">
-            <h2>Development Process</h2>
-            <p>It all starts with geometry.</p>
-            <div class="video-section">
-                <video
-                    width="640"
-                    height="480"
-                    controls
-                    autoplay
-                    loop
-                    muted
-                    poster="thumbnail.jpg"
-                >
-                    <source
-                        src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/bolted shifter clamp v2 v36.mp4"
-                        type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                </video>
-                <video
-                    width="640"
-                    height="480"
-                    controls
-                    autoplay
-                    loop
-                    muted
-                    poster="thumbnail.jpg"
-                >
-                    <source
-                        src="/Users/elipage/Desktop/PersonalWebsite/media/Bluetooth Bike Shifter/Actuator Housing v3 v66.mp4"
-                        type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </section>
-
-        <section id="future-improvements" class="future-improvements">
-            <h2>Future Improvements</h2>
+        <section class="problem">
+            <h1>The Problem</h1>
             <p>
-                We're exploring integration with cycling computers for data
-                analysis, further reducing power consumption, and developing a
-                pro version with advanced features for competitive cyclists.
+                Existing wireless shifters are VERY expensive ($1500+) and
+                inherently vulnerable to impacts.
+            </p>
+            <p>
+                Mechanical shifting systems are only compatible with one gear
+                configuration (1x12 for example).
+            </p>
+            <p>
+                Shift distance between specific gears cannot be adjusted with a
+                mechanical system.
+            </p>
+            <p>Mechanical shift cables are ugly.</p>
+        </section>
+
+        <section style="text-align: center; padding: 5rem 0">
+            <img
+                src="media/largewhitearrow.png"
+                style="width: 15rem; transform: rotate(180deg)"
+                alt="Arrow Down"
+            />
+        </section>
+
+        <section class="user-needs">
+            <h1>User Needs</h1>
+            <div class="user-needs-items">
+                <div class="user-needs-item">
+                    <img src="media/icons/pptbikeicon.png" alt="Universal" />
+                    <p>Universal</p>
+                    <ul>
+                        <li>Fits a variety of users</li>
+                        <li>Adaptable to different environments</li>
+                    </ul>
+                </div>
+                <div class="user-needs-item">
+                    <img src="media/icons/pptdurableicon.png" alt="Durable" />
+                    <p>Durable</p>
+                    <ul>
+                        <li>Withstands harsh conditions</li>
+                        <li>Long-lasting materials</li>
+                    </ul>
+                </div>
+                <div class="user-needs-item">
+                    <img src="media/icons/pptreliableicon.png" alt="Reliable" />
+                    <p>Reliable</p>
+                    <ul>
+                        <li>Consistent performance</li>
+                        <li>Minimal maintenance required</li>
+                    </ul>
+                </div>
+                <div class="user-needs-item">
+                    <img
+                        src="media/icons/pptremoteicon.png"
+                        alt="Easy to Use"
+                    />
+                    <p>Easy to Use</p>
+                    <ul>
+                        <li>Simple, intuitive interface</li>
+                        <li>Quick learning curve</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section
+            id="prototypes"
+            style="display: flex; justify-content: center; align-items: center"
+        >
+            <div class="bento-box">
+                <div class="video-section">
+                    <div class="video-container">
+                        <video controls autoplay loop muted playsinline>
+                            <source
+                                src="media/bbs/Prototypes/Short first test bluetooth bike shifter .mp4"
+                                type="video/mp4"
+                            />
+                            Your browser does not support the video tag.
+                        </video>
+                        <div
+                            class="video-description"
+                            style="padding-top: 7.5vh"
+                        >
+                            <h1>Drive by Wire Prototype</h1>
+                            <p>
+                                Is a linear actuator strong and fast enough to
+                                deliver responsive shifting under load?
+                            </p>
+                            <p>
+                                Is the backdrive friction actually strong enough
+                                to hold its position under load?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h1 style="text-align: left; padding-left: 15%; padding-right: 15%">
+                The Remote
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                "
+            >
+                Any good shifter needs to be ergonomic enough for the user to
+                keep one finger on the brake lever and their thumb on the
+                shifter. I settled on a joystick to accomplish this and give the
+                shifter a fun feel. The original clamp made of two half circles
+                was replaced by a one piece clamp cut from 6061 aluminum. The
+                shifter also originally used two 2032 coin cell batteries, but I
+                decided to power it with one of the same Li-ion batteries used
+                in the receiver.
+            </p>
+            <div class="image-grid">
+                <img
+                    src="media/bbs/remotestuff/IMG_5674.HEIC"
+                    alt="Bluetooth Module Image 1"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5721.HEIC"
+                    alt="Bluetooth Module Image 2"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5722.HEIC"
+                    alt="Bluetooth Module Image 3"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5723.HEIC"
+                    alt="Bluetooth Module Image 4"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5724.HEIC"
+                    alt="Bluetooth Module Image 5"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5726.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5727.HEIC"
+                    alt="Bluetooth Module Image 7"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5728.HEIC"
+                    alt="Bluetooth Module Image 8"
+                />
+            </div>
+
+            <div class="video-wrapper">
+                <video controls autoplay loop muted playsinline>
+                    <source
+                        src="media/bbs/bolted shifter clamp v2 v36.mp4"
+                        type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section>
+            <h1
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                The Actuator
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                First, I designed 3 different housing closure types: snap fit,
+                press fit, and a bolted version. I ended up choosing the bolted
+                version because it was easier to manufacture and more secure.
+            </p>
+
+            <div class="images">
+                <div class="image-list">
+                    <img
+                        src="media/bbs/actuatorstuff/IMG_5680.HEIC"
+                        alt="Snap Fit"
+                    />
+                    <img
+                        src="media/bbs/actuatorstuff/IMG_5689_edited.jpg"
+                        alt="Press Fit"
+                    />
+                    <img
+                        src="media/bbs/actuatorstuff/IMG_5682.HEIC"
+                        alt="Bolted"
+                    />
+                </div>
+            </div>
+
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                To shorten the length of the actuator and cable attachment, I
+                designed and machined a set screw rather than machining or 3D
+                printing a more complex assembly.
+            </p>
+
+            <div class="images">
+                <div
+                    class="image-list"
+                    style="width: 75rem; align-items: center"
+                >
+                    <img
+                        style="height: 20rem; flex-basis: 50%"
+                        src="media/bbs/shortstrokestuff/IMG_5696.HEIC"
+                        alt="Bluetooth Module Image 1"
+                    />
+                    <img
+                        style="height: 20rem; flex-basis: 30%"
+                        src="media/bbs/shortstrokestuff/IMG_5700.HEIC"
+                        alt="Bluetooth Module Image 2"
+                    />
+                </div>
+            </div>
+
+            <div class="images">
+                <div
+                    class="image-list"
+                    style="width: 75rem; align-items: center"
+                >
+                    <img
+                        style="height: 20rem; flex-basis: 30%"
+                        src="media/bbs/shortstrokestuff/IMG_5702.HEIC"
+                        alt="Bluetooth Module Image 1"
+                    />
+                    <img
+                        style="height: 20rem; flex-basis: 50%"
+                        src="media/bbs/shortstrokestuff/IMG_5706.HEIC"
+                        alt="Bluetooth Module Image 2"
+                    />
+                </div>
+            </div>
+
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                After receiving design feedback from an upperclassmen
+                engineering student, I decided to make the seal area smaller by
+                doing a major housing re-design. With the redesign I also
+                decided to include functionality for a seat dropper post
+                control, which involved adding another actuator. A key element
+                of this design is the actuator harness. It organizes the wiring,
+                holds the actuators in place, and provides a place for the
+                Arduino Nano to be mounted.
+            </p>
+
+            <div class="image-grid">
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5731.HEIC"
+                    alt="Bluetooth Module Image 8"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5733.HEIC"
+                    alt="Bluetooth Module Image 1"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5734.HEIC"
+                    alt="Bluetooth Module Image 2"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5716.HEIC"
+                    alt="Bluetooth Module Image 7"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5707.HEIC"
+                    alt="Bluetooth Module Image 3"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5710.HEIC"
+                    alt="Bluetooth Module Image 4"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5711.HEIC"
+                    alt="Bluetooth Module Image 5"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+                <img
+                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
+                    alt="Bluetooth Module Image 6"
+                />
+            </div>
+
+            <div class="video-wrapper">
+                <video controls autoplay loop muted playsinline>
+                    <source
+                        src="media/bbs/Actuator Housing v3 v66.mp4"
+                        type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section>
+            <h1
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                Verification and Validation
+            </h1>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                Paragraph about testing
+            </p>
+            <div class="image-grid">
+                <img
+                    src="media/bbs/remotestuff/IMG_5674.HEIC"
+                    alt="Bluetooth Module Image 1"
+                />
+                <img
+                    src="media/bbs/remotestuff/IMG_5721.HEIC"
+                    alt="Bluetooth Module Image 2"
+                />
+            </div>
+
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                video of jump
             </p>
         </section>
 
-        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
-        <script src="script.js"></script>
+        <div class="bento-box">
+            <div class="main-image">
+                <img
+                    src="media/bbs/Prototypes/FromGroundNomadWilk.png"
+                    alt="Remote main image"
+                />
+            </div>
+            <div class="sub-images">
+                <div class="sub-image-left">
+                    <img
+                        src="media/bbs/Prototypes/ActuatorView.jpg"
+                        alt="Remote image 2"
+                    />
+                </div>
+                <div class="sub-image-right">
+                    <img
+                        src="media/bbs/Prototypes/ShifterUpClose.jpg"
+                        alt="Remote image 3"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <section
+            style="
+                margin-top: 5rem;
+                background-color: white;
+                border-radius: 1rem;
+            "
+        >
+            <h2>Control Scheme</h2>
+            <img
+                src="media/bbs/ControlBlockDiagram.png"
+                alt="Control Scheme Image"
+                style="width: 100%; height: auto"
+            />
+        </section>
     </body>
 </html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Alternating Sections Webpage</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .section {
+                display: flex;
+                align-items: center;
+                height: 75vh;
+                padding: 20px;
+            }
+            .text-content {
+                flex: 1;
+                max-width: 33%;
+                padding: 20px;
+            }
+            .image-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                height: 100%;
+            }
+            .rotating-image {
+                width: 300px;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 20px;
+                position: absolute;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            .rotating-image.active {
+                opacity: 1;
+            }
+            .section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="section">
+            <div class="text-content">
+                <h2>Section 1 Heading</h2>
+                <p>
+                    This is the paragraph text for section 1. It has a max width
+                    of about a third of the page. The content here can be
+                    customized as needed.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="media/joris/20220805_163653.jpg"
+                    alt="Image 1"
+                    class="rotating-image active"
+                />
+                <img
+                    src="media/joris/CutOutVive.png"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/joris/From Afar, One Side removed.jpg"
+                    alt="Image 3"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/joris/Up Close of Mount.jpg"
+                    alt="Image 4"
+                    class="rotating-image"
+                />
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text-content">
+                <h2>Section 2 Heading</h2>
+                <p>
+                    This is the paragraph text for section 2. It's on the left
+                    side now, with the image on the right. The layout alternates
+                    for each section.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="/api/placeholder/300/300"
+                    alt="Image 1"
+                    class="rotating-image active"
+                />
+                <img
+                    src="/api/placeholder/300/300"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="/api/placeholder/300/300"
+                    alt="Image 3"
+                    class="rotating-image"
+                />
+                <img
+                    src="/api/placeholder/300/300"
+                    alt="Image 4"
+                    class="rotating-image"
+                />
+            </div>
+        </div>
+
+        <script>
+            function rotateImages() {
+                const containers =
+                    document.querySelectorAll(".image-container");
+                containers.forEach((container) => {
+                    const images =
+                        container.querySelectorAll(".rotating-image");
+                    let currentIndex = 0;
+
+                    setInterval(() => {
+                        images[currentIndex].classList.remove("active");
+                        currentIndex = (currentIndex + 1) % images.length;
+                        images[currentIndex].classList.add("active");
+                    }, 3000);
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", rotateImages);
+        </script>
+    </body>
+</html>

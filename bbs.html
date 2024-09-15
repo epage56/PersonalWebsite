@@ -578,41 +578,58 @@
                 too large to fit in any printer. In order to shorten the overall
                 length I realized I could shorten the cable and actuator
                 interface. To do this, I modified a set screw rather than
-                machining or 3D printing a more complex assembly.
+                machining or 3D printing a complex part.
             </p>
 
-            <div class="images">
+            <div
+                class="images"
+                style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                "
+            >
                 <div
                     class="image-list"
-                    style="width: 75rem; align-items: center"
+                    style="
+                        display: flex;
+                        justify-content: center;
+                        gap: 1rem;
+                        width: 100%;
+                        max-width: 75rem;
+                    "
                 >
                     <img
-                        style="height: 20rem; flex-basis: 50%"
+                        style="height: 20rem; width: auto; max-width: 50%"
                         src="media/bbs/shortstrokestuff/IMG_5696.HEIC"
                         alt="Bluetooth Module Image 1"
                     />
                     <img
-                        style="height: 20rem; flex-basis: 30%"
+                        style="height: 20rem; width: auto; max-width: 30%"
                         src="media/bbs/shortstrokestuff/IMG_5700.HEIC"
                         alt="Bluetooth Module Image 2"
                     />
                 </div>
-            </div>
 
-            <div class="images">
                 <div
                     class="image-list"
-                    style="width: 75rem; align-items: center"
+                    style="
+                        display: flex;
+                        justify-content: center;
+                        gap: 1rem;
+                        width: 100%;
+                        max-width: 75rem;
+                    "
                 >
                     <img
-                        style="height: 20rem; flex-basis: 30%"
+                        style="height: 20rem; width: auto; max-width: 30%"
                         src="media/bbs/shortstrokestuff/IMG_5702.HEIC"
-                        alt="Bluetooth Module Image 1"
+                        alt="Bluetooth Module Image 3"
                     />
                     <img
-                        style="height: 20rem; flex-basis: 50%"
+                        style="height: 20rem; width: auto; max-width: 50%"
                         src="media/bbs/shortstrokestuff/IMG_5706.HEIC"
-                        alt="Bluetooth Module Image 2"
+                        alt="Bluetooth Module Image 4"
                     />
                 </div>
             </div>
@@ -632,10 +649,10 @@
                 effective to minimize the seal area by moving the seal to the
                 rear of the device. With the redesign I also decided to include
                 an additional actuator, increasing the functionality to not only
-                electrifying the shifter but also the dropper post. A key
-                element of this design is the actuator harness. It organizes the
-                wiring, holds the actuators in place, and provides a place for
-                the Arduino Nano to be mounted.
+                converting the shifter to bluetooth but also the dropper post. A
+                key element of this re-design is the actuator harness. It
+                organizes the wiring, holds the actuators in place, and provides
+                a place for the Arduino Nano to be mounted.
             </p>
 
             <div class="image-grid">
@@ -703,53 +720,126 @@
         <section>
             <h1
                 style="
-                    text-align: left;
+                    text-align: center;
+                    padding-top: 10vh;
                     padding-left: 15%;
                     padding-right: 15%;
                     color: rgb(0, 65, 0);
+                "
+            >
+                Block Diagram
+            </h1>
+            <p
+                style="
+                    text-align: center;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 14pt;
+                    padding-bottom: 2rem;
+                    color: rgb(0, 65, 0);
+                "
+            >
+                It is quite hard to visualize the control loop of this system
+                without a block diagram. The input is obviously the desired gear
+                and the output the actual gear
+            </p>
+
+            <img
+                src="media/bbs/ControlBlockDiagram.png"
+                alt="Control Scheme Image"
+                style="width: 100%; height: auto; box-shadow: 0px"
+            />
+        </section>
+
+        <section style="padding: 0 15%">
+            <h1
+                style="
+                    color: rgb(0, 65, 0);
+                    margin-bottom: 2rem;
+                    text-align: center;
+                    padding-top: 10vh;
                 "
             >
                 Verification and Validation Testing
             </h1>
+
             <p
                 style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
                     font-size: 14pt;
-                    padding-bottom: 2rem;
                     color: rgb(0, 65, 0);
+                    text-align: center;
+                    margin-bottom: 5rem;
                 "
             >
                 Throughout the course of this project various tests were
-                performed to quantify the device.
+                performed to quantify the device such as a battery life test,
+                bluetooth connectivity test, ingress testing, and most
+                importantly a rigourous validation feild test for 6 months.
             </p>
 
-            B
-
-            <div class="image-grid">
-                <img
-                    src="media/bbs/remotestuff/IMG_5674.HEIC"
-                    alt="Bluetooth Module Image 1"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5721.HEIC"
-                    alt="Bluetooth Module Image 2"
-                />
+            <div style="display: flex; align-items: center">
+                <div
+                    style="
+                        flex: 1;
+                        height: 75vh;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        overflow: hidden;
+                        border-radius: 1rem;
+                    "
+                >
+                    <video
+                        style="
+                            width: 75vh;
+                            height: 100%;
+                            object-fit: cover;
+                            transform: rotate(270deg);
+                            transform-origin: center;
+                        "
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                    >
+                        <source src="media/bbs/Jump.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div
+                    style="
+                        flex: 1;
+                        padding-left: 2rem;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        height: 75vh;
+                    "
+                >
+                    <h2
+                        style="
+                            color: rgb(0, 65, 0);
+                            margin-bottom: 1rem;
+                            text-align: left;
+                        "
+                    >
+                        Shock Loads
+                    </h2>
+                    <p
+                        style="
+                            font-size: 14pt;
+                            color: rgb(0, 65, 0);
+                            text-align: center;
+                        "
+                    >
+                        One of the more uncertain parts about this project were
+                        the shock loads that the device might experience.
+                        Instead of devising a way to estimate and test shock
+                        loads I went straight to testing on high speed impacts
+                        such as the jump shown to the left.
+                    </p>
+                </div>
             </div>
-
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                video of jump
-            </p>
         </section>
 
         <div class="bento-box">
@@ -774,20 +864,5 @@
                 </div>
             </div>
         </div>
-
-        <section
-            style="
-                margin-top: 5rem;
-                background-color: white;
-                border-radius: 1rem;
-            "
-        >
-            <h2>Control Scheme</h2>
-            <img
-                src="media/bbs/ControlBlockDiagram.png"
-                alt="Control Scheme Image"
-                style="width: 100%; height: auto"
-            />
-        </section>
     </body>
 </html>

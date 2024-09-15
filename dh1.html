@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bluetooth Bike Shifter - Eli Page Hardware</title>
+        <title>dh1 - Full Suspension Mountain Bike</title>
         <link rel="stylesheet" href="styles.css" />
         <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
         <script src="script.js"></script>
@@ -75,151 +75,85 @@
 
             .hero img {
                 width: 70%;
-                max-width: 800px; /* Adjust this value as needed */
+                max-width: 800px;
                 height: auto;
-                margin-top: 2rem; /* Adds some space between the text and the image */
+                margin-top: 2rem;
             }
 
-            .video-section,
-            .bento-box {
-                display: flex;
-                flex-direction: column;
-                gap: 5rem;
-                margin-top: 5rem;
-                margin-bottom: 5rem;
-            }
-
-            .video-container,
-            .sub-images {
+            .container {
                 display: flex;
                 justify-content: space-between;
-                gap: 2rem;
+                padding: 0 10%;
+                gap: 2%;
             }
 
-            .video-description {
-                padding-left: 2rem;
+            .box {
+                flex-basis: 22%;
+                background-color: var(--black);
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin: 10px 0;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .box:hover {
+                transform: scale(1.05);
+            }
+
+            .section {
+                display: flex;
+                align-items: center;
+                height: 75vh;
+                padding: 20px;
+                margin-bottom: 2rem;
+            }
+
+            .text-content {
                 flex: 1;
-                max-width: 300px;
+                max-width: 50%;
             }
 
-            video {
-                height: 90vh;
-                border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            img {
-                width: 100%;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .sub-image-left,
-            .sub-image-right {
-                width: calc(66.67% - 0.75rem);
-            }
-
-            .sub-image-right {
-                width: calc(33.33% - 0.75rem);
-            }
-
-            .problem,
-            .user-needs {
-                padding: 5vh 10%;
-                background-color: black;
-            }
-
-            .user-needs-items {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .user-needs-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin: 1rem;
-            }
-
-            .user-needs-item img {
-                width: 50px;
-                height: 50px;
-                margin-bottom: 10px;
-            }
-
-            .user-needs ul {
-                list-style-type: disc;
-                color: white;
-                font-size: 16px;
-                padding-left: 1.5rem;
-                margin-top: 0.5rem;
-            }
-
-            .user-needs li {
-                margin-bottom: 0.5rem;
-                line-height: 1.5;
-            }
-
-            .image-list {
-                display: flex;
-                flex-wrap: no-wrap; /* Prevents images from wrapping to a new line */
-                justify-content: center;
-                gap: 1rem;
-                padding-left: 15rem;
-                padding-right: 15rem;
-                padding-bottom: 1rem;
-            }
-
-            .image-list img {
-                width: calc(
-                    33.33% - 0.67rem
-                ); /* Adjusts width to account for gap */
-                object-fit: cover;
-                margin: 0;
-            }
-
-            .images .image-list {
-                display: flex;
-            }
-
-            .images .image-list img:first-child {
-                flex-basis: 40%; /* Adjusted to accommodate three images */
-            }
-
-            .images .image-list img:nth-child(2) {
-                flex-basis: 30%; /* Added styles for the middle image */
-            }
-
-            .images .image-list img:last-child {
-                flex-basis: 30%; /* Adjusted to match the middle image */
-            }
-
-            .image-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 25rem);
-                gap: 1rem;
-                margin: 0 auto;
-                max-width: calc(25rem * 2 + 1rem);
-            }
-
-            .image-grid img {
-                border-radius: 5px; /* Less aggressive rounding */
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            }
-
-            .video-wrapper {
+            .image-container {
+                flex: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 100%;
+                position: relative;
             }
-            .video-wrapper video {
-                max-width: 100%;
-                height: auto;
+
+            .rotating-image {
+                width: 40rem;
+                height: 30rem;
+                object-fit: cover;
+                border-radius: 20px;
+                position: absolute;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+
+            .rotating-image.active {
+                opacity: 1;
+            }
+
+            .section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    flex-wrap: wrap;
+                }
+                .box {
+                    flex-basis: 45%;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .box {
+                    flex-basis: 100%;
+                }
             }
         </style>
     </head>
@@ -242,11 +176,7 @@
             <p style="color: rgb(0, 65, 0)">
                 The perfect full suspension mountain bike
             </p>
-            <img
-                style="40vh 5%;"
-                src="media/dh1/Six-bar-Chains-01.jpg"
-                alt="Six-bar Chains"
-            />
+            <img src="media/dh1/Six-bar-Chains-01.jpg" alt="Six-bar Chains" />
         </section>
 
         <section>
@@ -270,9 +200,8 @@
                     color: var(--black);
                 "
             >
-                The goal of this project is to develop a novel mechanism
-                synthesis algorithm and apply it to something I know well -
-                vehicle dynamics of bikes. This project is an independent
+                The goal of this project is to design and build a full
+                suspension mountain bike. This project was an independent
                 research study advised by Dr. Rebecca Simmons and the Thomas
                 Lord Department of Mechanical Engineering and Material Science
                 at Duke University.
@@ -288,482 +217,218 @@
                     color: var(--black);
                 "
             >
-                A common way to appoorach vehicle dynamics of a mountain bike is
+                A common way to approach vehicle dynamics of a mountain bike is
                 through the program Linkage X3 in combination with a graphical
                 mechanism design software such as Linkage. Most complex and
                 desireable linkages have an infinite number of solutions with a
-                highly complex relationship between leverage ratio and changes
-                in pivot point locations. The point of this project is to
-                eliminate the guesswork from this design process.
+                highly complex relationship between leverage ratio and pivot
+                point locations. The point of this project is to eliminate the
+                guesswork from this design process.
             </p>
 
-            <div class="images">
-                <div class="image-list">
-                    <img src="media/dh1/Optimized 4bar Path .png" />
-                    <img src="media/dh1/Pareto Front.png" />
+            <div class="container">
+                <div id="stage1" class="box">
+                    <h2>Stage 1</h2>
+                    <p>Kinematic synthesis of suspension linkage</p>
+                    <p>
+                        Particle Swarm Optimization, Advanced Mechanical
+                        synthesis, Constrained Optimization
+                    </p>
+                </div>
+                <div id="stage2" class="box">
+                    <h2>Stage 2</h2>
+                    <p>Structural design of bike frame</p>
+                    <p>
+                        Smart SolidWorks model linked to optimization results,
+                        FEA simulation backed by hand calculations
+                    </p>
+                </div>
+                <div id="stage3" class="box">
+                    <h2>Stage 3</h2>
+                    <p>Fixture Design and Fabrication</p>
+                    <p>
+                        Design and Build adjustable Jig, machine components,
+                        assemble
+                    </p>
+                </div>
+                <div id="stage4" class="box">
+                    <h2>Stage 4</h2>
+                    <p>Validation and testing via telemetry array</p>
+                    <p>
+                        Configure testing harness complete with accelerometers,
+                        strain gauges, and biometric sensors to analyze the
+                        performance of the human-machine system
+                    </p>
                 </div>
             </div>
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: var(--black);
-                "
-            >
-                Th
-            </p>
+        </section>
 
-            <div style="text-align: center">
-                <img
-                    src="media/largewhitearrow.png"
+        <section id="stage1-section" class="section">
+            <div class="text-content">
+                <h2
                     style="
-                        width: 15rem;
-                        transform: rotate(180deg);
-                        margin: 0 auto;
-                        padding: 5vh;
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
                     "
-                    alt="Arrow Down"
-                />
-            </div>
-            <div style="text-align: center">
-                <object
-                    data="media/bbs/Icons/Arduino Nano Ble 33.svg"
-                    type="image/svg+xml"
-                    style="width: 25rem; height: auto; margin: 0 auto"
-                ></object>
-            </div>
-        </section>
-
-        <section class="problem">
-            <h1>The Problem</h1>
-            <p>
-                Existing wireless shifters are VERY expensive ($1500+) and
-                inherently vulnerable to impacts.
-            </p>
-            <p>
-                Mechanical shifting systems are only compatible with one gear
-                configuration (1x12 for example).
-            </p>
-            <p>
-                Shift distance between specific gears cannot be adjusted with a
-                mechanical system.
-            </p>
-            <p>Mechanical shift cables are ugly.</p>
-        </section>
-
-        <section style="text-align: center; padding: 5rem 0">
-            <img
-                src="media/largewhitearrow.png"
-                style="width: 15rem; transform: rotate(180deg)"
-                alt="Arrow Down"
-            />
-        </section>
-
-        <section class="user-needs">
-            <h1>User Needs</h1>
-            <div class="user-needs-items">
-                <div class="user-needs-item">
-                    <img src="media/icons/pptbikeicon.png" alt="Universal" />
-                    <p>Universal</p>
-                    <ul>
-                        <li>Fits a variety of users</li>
-                        <li>Adaptable to different environments</li>
-                    </ul>
-                </div>
-                <div class="user-needs-item">
-                    <img src="media/icons/pptdurableicon.png" alt="Durable" />
-                    <p>Durable</p>
-                    <ul>
-                        <li>Withstands harsh conditions</li>
-                        <li>Long-lasting materials</li>
-                    </ul>
-                </div>
-                <div class="user-needs-item">
-                    <img src="media/icons/pptreliableicon.png" alt="Reliable" />
-                    <p>Reliable</p>
-                    <ul>
-                        <li>Consistent performance</li>
-                        <li>Minimal maintenance required</li>
-                    </ul>
-                </div>
-                <div class="user-needs-item">
-                    <img
-                        src="media/icons/pptremoteicon.png"
-                        alt="Easy to Use"
-                    />
-                    <p>Easy to Use</p>
-                    <ul>
-                        <li>Simple, intuitive interface</li>
-                        <li>Quick learning curve</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section
-            id="prototypes"
-            style="display: flex; justify-content: center; align-items: center"
-        >
-            <div class="bento-box">
-                <div class="video-section">
-                    <div class="video-container">
-                        <video controls autoplay loop muted playsinline>
-                            <source
-                                src="media/bbs/Prototypes/Short first test bluetooth bike shifter .mp4"
-                                type="video/mp4"
-                            />
-                            Your browser does not support the video tag.
-                        </video>
-                        <div
-                            class="video-description"
-                            style="padding-top: 7.5vh"
-                        >
-                            <h1>Drive by Wire Prototype</h1>
-                            <p>
-                                Is a linear actuator strong and fast enough to
-                                deliver responsive shifting under load?
-                            </p>
-                            <p>
-                                Is the backdrive friction actually strong enough
-                                to hold its position under load?
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h1 style="text-align: left; padding-left: 15%; padding-right: 15%">
-                The Remote
-            </h1>
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                "
-            >
-                Any good shifter needs to be ergonomic enough for the user to
-                keep one finger on the brake lever and their thumb on the
-                shifter. I settled on a joystick to accomplish this and give the
-                shifter a fun feel. The original clamp made of two half circles
-                was replaced by a one piece clamp cut from 6061 aluminum. The
-                shifter also originally used two 2032 coin cell batteries, but I
-                decided to power it with one of the same Li-ion batteries used
-                in the receiver.
-            </p>
-            <div class="image-grid">
-                <img
-                    src="media/bbs/remotestuff/IMG_5674.HEIC"
-                    alt="Bluetooth Module Image 1"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5721.HEIC"
-                    alt="Bluetooth Module Image 2"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5722.HEIC"
-                    alt="Bluetooth Module Image 3"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5723.HEIC"
-                    alt="Bluetooth Module Image 4"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5724.HEIC"
-                    alt="Bluetooth Module Image 5"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5726.HEIC"
-                    alt="Bluetooth Module Image 6"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5727.HEIC"
-                    alt="Bluetooth Module Image 7"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5728.HEIC"
-                    alt="Bluetooth Module Image 8"
-                />
-            </div>
-
-            <div class="video-wrapper">
-                <video controls autoplay loop muted playsinline>
-                    <source
-                        src="media/bbs/bolted shifter clamp v2 v36.mp4"
-                        type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-        </section>
-
-        <section>
-            <h1
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                The Actuator
-            </h1>
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                First, I designed 3 different housing closure types: snap fit,
-                press fit, and a bolted version. I ended up choosing the bolted
-                version because it was easier to manufacture and more secure.
-            </p>
-
-            <div class="images">
-                <div class="image-list">
-                    <img
-                        src="media/bbs/actuatorstuff/IMG_5680.HEIC"
-                        alt="Snap Fit"
-                    />
-                    <img
-                        src="media/bbs/actuatorstuff/IMG_5689_edited.jpg"
-                        alt="Press Fit"
-                    />
-                    <img
-                        src="media/bbs/actuatorstuff/IMG_5682.HEIC"
-                        alt="Bolted"
-                    />
-                </div>
-            </div>
-
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                To shorten the length of the actuator and cable attachment, I
-                designed and machined a set screw rather than machining or 3D
-                printing a more complex assembly.
-            </p>
-
-            <div class="images">
-                <div
-                    class="image-list"
-                    style="width: 75rem; align-items: center"
                 >
-                    <img
-                        style="height: 20rem; flex-basis: 50%"
-                        src="media/bbs/shortstrokestuff/IMG_5696.HEIC"
-                        alt="Bluetooth Module Image 1"
-                    />
-                    <img
-                        style="height: 20rem; flex-basis: 30%"
-                        src="media/bbs/shortstrokestuff/IMG_5700.HEIC"
-                        alt="Bluetooth Module Image 2"
-                    />
-                </div>
-            </div>
-
-            <div class="images">
-                <div
-                    class="image-list"
-                    style="width: 75rem; align-items: center"
+                    Stage 1: Kinematic Synthesis
+                </h2>
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
                 >
-                    <img
-                        style="height: 20rem; flex-basis: 30%"
-                        src="media/bbs/shortstrokestuff/IMG_5702.HEIC"
-                        alt="Bluetooth Module Image 1"
-                    />
-                    <img
-                        style="height: 20rem; flex-basis: 50%"
-                        src="media/bbs/shortstrokestuff/IMG_5706.HEIC"
-                        alt="Bluetooth Module Image 2"
-                    />
-                </div>
+                    This stage involved the kinematic synthesis of the
+                    suspension linkage using advanced techniques such as
+                    Particle Swarm Optimization and Constrained Optimization.
+                    This process allowed us to eliminate guesswork from the
+                    design process and achieve a highly efficient suspension
+                    system.
+                </p>
             </div>
-
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                After receiving design feedback from an upperclassmen
-                engineering student, I decided to make the seal area smaller by
-                doing a major housing re-design. With the redesign I also
-                decided to include functionality for a seat dropper post
-                control, which involved adding another actuator. A key element
-                of this design is the actuator harness. It organizes the wiring,
-                holds the actuators in place, and provides a place for the
-                Arduino Nano to be mounted.
-            </p>
-
-            <div class="image-grid">
+            <div class="image-container">
                 <img
-                    src="media/bbs/actuatorstuff/IMG_5731.HEIC"
-                    alt="Bluetooth Module Image 8"
+                    src="media/dh1/Optimized 4bar Path .png"
+                    alt="Optimized 4bar Path"
+                    class="rotating-image active"
                 />
                 <img
-                    src="media/bbs/actuatorstuff/IMG_5733.HEIC"
-                    alt="Bluetooth Module Image 1"
+                    src="media/dh1/Pareto Front.png"
+                    alt="Pareto Front"
+                    class="rotating-image"
                 />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5734.HEIC"
-                    alt="Bluetooth Module Image 2"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5716.HEIC"
-                    alt="Bluetooth Module Image 7"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5707.HEIC"
-                    alt="Bluetooth Module Image 3"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5710.HEIC"
-                    alt="Bluetooth Module Image 4"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5711.HEIC"
-                    alt="Bluetooth Module Image 5"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
-                    alt="Bluetooth Module Image 6"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
-                    alt="Bluetooth Module Image 6"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
-                    alt="Bluetooth Module Image 6"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
-                    alt="Bluetooth Module Image 6"
-                />
-                <img
-                    src="media/bbs/actuatorstuff/IMG_5713.HEIC"
-                    alt="Bluetooth Module Image 6"
-                />
-            </div>
-
-            <div class="video-wrapper">
-                <video controls autoplay loop muted playsinline>
-                    <source
-                        src="media/bbs/Actuator Housing v3 v66.mp4"
-                        type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                </video>
             </div>
         </section>
 
-        <section>
-            <h1
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                Verification and Validation
-            </h1>
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                Paragraph about testing
-            </p>
-            <div class="image-grid">
-                <img
-                    src="media/bbs/remotestuff/IMG_5674.HEIC"
-                    alt="Bluetooth Module Image 1"
-                />
-                <img
-                    src="media/bbs/remotestuff/IMG_5721.HEIC"
-                    alt="Bluetooth Module Image 2"
-                />
+        <section id="stage2-section" class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Stage 2: Structural Design
+                </h2>
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    In this stage, we focused on the structural design of the
+                    bike frame. We created a smart SolidWorks model linked to
+                    the optimization results from Stage 1. FEA simulations,
+                    backed by hand calculations, were used to ensure the
+                    structural integrity of the design.
+                </p>
             </div>
-
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: rgb(0, 65, 0);
-                "
-            >
-                video of jump
-            </p>
+            <div class="image-container">
+                <!-- Add relevant images for Stage 2 -->
+            </div>
         </section>
 
-        <div class="bento-box">
-            <div class="main-image">
-                <img
-                    src="media/bbs/Prototypes/FromGroundNomadWilk.png"
-                    alt="Remote main image"
-                />
+        <section id="stage3-section" class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Stage 3: Fixture Design and Fabrication
+                </h2>
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    This stage involved designing and building an adjustable
+                    jig, machining components, and assembling the bike frame.
+                    The focus was on creating a precise and efficient
+                    fabrication process.
+                </p>
             </div>
-            <div class="sub-images">
-                <div class="sub-image-left">
-                    <img
-                        src="media/bbs/Prototypes/ActuatorView.jpg"
-                        alt="Remote image 2"
-                    />
-                </div>
-                <div class="sub-image-right">
-                    <img
-                        src="media/bbs/Prototypes/ShifterUpClose.jpg"
-                        alt="Remote image 3"
-                    />
-                </div>
+            <div class="image-container">
+                <!-- Add relevant images for Stage 3 -->
             </div>
-        </div>
-
-        <section
-            style="
-                margin-top: 5rem;
-                background-color: white;
-                border-radius: 1rem;
-            "
-        >
-            <h2>Control Scheme</h2>
-            <img
-                src="media/bbs/ControlBlockDiagram.png"
-                alt="Control Scheme Image"
-                style="width: 100%; height: auto"
-            />
         </section>
+
+        <section id="stage4-section" class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Stage 4: Validation and Testing
+                </h2>
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    In the final stage, we configured a testing harness complete
+                    with accelerometers, strain gauges, and biometric sensors to
+                    analyze the performance of the human-machine system. This
+                    comprehensive testing approach allowed us to validate the
+                    design and make necessary adjustments.
+                </p>
+            </div>
+            <div class="image-container">
+                <!-- Add relevant images for Stage 4 -->
+            </div>
+        </section>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const boxes = document.querySelectorAll(".box");
+                boxes.forEach((box) => {
+                    box.addEventListener("click", function () {
+                        const stageId = this.id;
+                        const sectionId = stageId + "-section";
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            section.scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+            });
+
+            function rotateImages() {
+                const containers =
+                    document.querySelectorAll(".image-container");
+                containers.forEach((container) => {
+                    const images =
+                        container.querySelectorAll(".rotating-image");
+                    let currentIndex = 0;
+
+                    setInterval(() => {
+                        images[currentIndex].classList.remove("active");
+                        currentIndex = (currentIndex + 1) % images.length;
+                        images[currentIndex].classList.add("active");
+                    }, 3000);
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", rotateImages);
+        </script>
     </body>
 </html>
+```

@@ -226,6 +226,37 @@
                 max-width: 100%;
                 height: auto;
             }
+
+            .spec-link {
+                text-decoration: none;
+                color: inherit;
+                position: relative;
+                transition:
+                    transform 0.3s ease,
+                    text-shadow 0.3s ease;
+                display: inline-block;
+            }
+
+            .spec-link:hover {
+                transform: translateY(-5px) scale(1.05);
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .spec-link::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: currentColor;
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+
+            .spec-link:hover::after {
+                transform: scaleX(1);
+            }
         </style>
     </head>
     <body>
@@ -350,12 +381,12 @@
                         >
                             <h1>Drive by Wire Prototype</h1>
                             <p>
-                                Is a linear actuator strong and fast enough to
-                                deliver responsive shifting under load?
-                            </p>
-                            <p>
-                                Is the backdrive friction actually strong enough
-                                to hold its position under load?
+                                Is the Linear Actuator
+                                <a href="LinActSpec.html" class="spec-link"
+                                    ><strong>I specced</strong></a
+                                >
+                                strong and fast enough to deliver responsive
+                                shifting under load?
                             </p>
                         </div>
                     </div>
@@ -376,16 +407,13 @@
                     padding-bottom: 2rem;
                 "
             >
-                Originally, I started with a model HC-05 Bluetooth module, which
-                continuously transmits data. After connecting two modules and
-                two Arduino microcontrollers, I realized that the wiring was
-                overly complex, the system I realized that the wiring was overly
-                complex, the system was unnecessarily bulky, and the continuous
-                transmission of data was wasteful considering shifts were
-                infrequent and random. From there, I decided to switch to an
-                Arduino Nano 33 BLE Sense microcontroller, which has integrated
-                low energy Bluetooth. This more modern connection is perfect for
-                the infrequent shifts and small size.
+                Originally I started with HC-05 Bluetooth modules, which
+                continuously transmit data. I quickly realized that not only was
+                the wiring overly complex but the continuous transmission of
+                data was not necessary in this application. I then decided to
+                make the change to Arduino Nano 33 BLE Sense microcontrollers,
+                which have integrated low energy Bluetooth, perfect for
+                irregular communication.
             </p>
             <div class="images">
                 <div class="image-list">
@@ -433,14 +461,14 @@
                     padding-bottom: 2rem;
                 "
             >
-                Any good shifter needs to be ergonomic enough for the user to
-                keep one finger on the brake lever and their thumb on the
-                shifter. I settled on a joystick to accomplish this and give the
-                shifter a fun feel. The original clamp made of two half circles
-                was replaced by a one piece clamp cut from 6061 aluminum. The
-                shifter also originally used two 2032 coin cell batteries, but I
-                decided to power it with one of the same Li-ion batteries used
-                in the receiver.
+                Any good shifter should allow for the user to keep one finger on
+                the brake lever and their thumb on the shifter. I settled on a
+                joystick to accomplish this and give the shifter a fun feel. The
+                original shifter clamp I prototyped was made from two half
+                circles but I realized I could make it all once piece with a
+                flexure, reducing part count and weight. A final change was the
+                transition from two 2032 coin batteries to the same to Li-ion AA
+                batteries found in the actuator.
             </p>
             <div class="image-grid">
                 <img
@@ -673,7 +701,7 @@
                     color: rgb(0, 65, 0);
                 "
             >
-                Testing and Validation
+                Verification and Validation Testing
             </h1>
             <p
                 style="
@@ -685,9 +713,12 @@
                     color: rgb(0, 65, 0);
                 "
             >
-                Throughout the course of this project I ran several tests to
-                quantify the device.
+                Throughout the course of this project various tests were
+                performed to quantify the device.
             </p>
+
+            B
+
             <div class="image-grid">
                 <img
                     src="media/bbs/remotestuff/IMG_5674.HEIC"

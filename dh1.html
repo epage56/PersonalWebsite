@@ -247,7 +247,7 @@
                     style="
                         color: rgb(0, 65, 0);
                         text-align: left;
-                        padding-left: 5rem;
+                        padding-left: 10%;
                     "
                 >
                     Stage 1: Kinematic Synthesis
@@ -256,20 +256,19 @@
                 <p
                     style="
                         text-align: left;
-                        padding-left: 15%;
-                        padding-right: 15%;
+                        padding-left: 10%;
+                        padding-right: 10%;
                         font-size: 20px;
                         padding-bottom: 2rem;
                         color: var(--black);
                     "
                 >
-                    A common way to approach vehicle dynamics of a mountain bike
-                    is through software such as Linkage X3 in combination with a
-                    graphical mechanism design software such as Linkage. Most
-                    complex and desireable linkages have an infinite number of
-                    solutions with a complex relationship between leverage ratio
-                    and pivot point locations. The point of this project is to
-                    eliminate the guesswork from this design process.
+                    A common way to approach suspension kinematic design of a
+                    mountain bike is through software such as Linkage X3 in
+                    combination with a 2d mechanism design software such as
+                    Linkage. This workflow presents a challenge; any change to a
+                    pivot point may drastically change the leverage curve,
+                    vertical wheel travel, or other key suspension metrics.
                 </p>
             </div>
             <div class="image-container">
@@ -296,9 +295,8 @@
                     padding-left: 5rem;
                 "
             >
-                Making this into an optimization problem
+                So, I turned it into an optimization problem
             </h2>
-
             <p
                 style="
                     text-align: left;
@@ -309,11 +307,15 @@
                     color: var(--black);
                 "
             >
-                All of the information needed for the design of a high
-                performance downhill mountain bike can be condensed into a few
-                digestable metrics: Overall Leverage ratio, Anti-Rise, Static
-                frame geometry, Stiffness, and
+                All of the information needed can be condensed into a few
+                digestable graphs: Rear Axle Path, Leverage Ratio, and
+                Anti-Rise.
             </p>
+
+            <img
+                src="media/dh1/Solution_set.png"
+                alt="Solution Set for Optimization"
+            />
         </div>
 
         <section id="stage2-section" class="section">

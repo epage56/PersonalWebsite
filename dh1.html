@@ -58,7 +58,7 @@
 
             p {
                 font-family: "Satoshi-Variable";
-                font-size: 20px;
+                font-size: 15px;
                 color: white;
                 line-height: 1.6;
                 max-width: 80%;
@@ -173,7 +173,7 @@
 
         <section class="hero">
             <h1 style="color: rgb(0, 65, 0)">dh1</h1>
-            <p style="color: rgb(0, 65, 0)">
+            <p style="color: rgb(0, 65, 0); font-size: 20px">
                 The perfect full suspension mountain bike
             </p>
             <img src="media/dh1/Six-bar-Chains-01.jpg" alt="Six-bar Chains" />
@@ -195,69 +195,47 @@
                     text-align: left;
                     padding-left: 15%;
                     padding-right: 15%;
-                    font-size: 14pt;
+                    font-size: 20px;
                     padding-bottom: 2rem;
                     color: var(--black);
                 "
             >
-                The goal of this project is to design and build a full
-                suspension mountain bike. This project was an independent
+                The goal of this project is to design and build the perfect full
+                suspension mountain bike. This project is an independent
                 research study advised by Dr. Rebecca Simmons and the Thomas
                 Lord Department of Mechanical Engineering and Material Science
                 at Duke University.
             </p>
 
-            <p
-                style="
-                    text-align: left;
-                    padding-left: 15%;
-                    padding-right: 15%;
-                    font-size: 14pt;
-                    padding-bottom: 2rem;
-                    color: var(--black);
-                "
-            >
-                A common way to approach vehicle dynamics of a mountain bike is
-                through the program Linkage X3 in combination with a graphical
-                mechanism design software such as Linkage. Most complex and
-                desireable linkages have an infinite number of solutions with a
-                highly complex relationship between leverage ratio and pivot
-                point locations. The point of this project is to eliminate the
-                guesswork from this design process.
-            </p>
-
             <div class="container">
                 <div id="stage1" class="box">
-                    <h2>Stage 1</h2>
-                    <p>Kinematic synthesis of suspension linkage</p>
+                    <h2>Kinematic synthesis</h2>
                     <p>
-                        Particle Swarm Optimization, Advanced Mechanical
-                        synthesis, Constrained Optimization
+                        Design of suspension linakge with Particle Swarm
+                        Optimization, Advanced Mechanical synthesis, Constrained
+                        Optimization
                     </p>
                 </div>
                 <div id="stage2" class="box">
-                    <h2>Stage 2</h2>
-                    <p>Structural design of bike frame</p>
+                    <h2>Structural design</h2>
                     <p>
                         Smart SolidWorks model linked to optimization results,
-                        FEA simulation backed by hand calculations
+                        FEA backed by hand calculations and experimentation
                     </p>
                 </div>
                 <div id="stage3" class="box">
-                    <h2>Stage 3</h2>
-                    <p>Fixture Design and Fabrication</p>
+                    <h2>Fixture Design and Fabrication</h2>
                     <p>
-                        Design and Build adjustable Jig, machine components,
-                        assemble
+                        Design and build fixturing for fabrication, machine
+                        frame components
                     </p>
                 </div>
                 <div id="stage4" class="box">
-                    <h2>Stage 4</h2>
-                    <p>Validation and testing via telemetry array</p>
+                    <h2>Verification and Validation</h2>
                     <p>
-                        Configure testing harness complete with accelerometers,
+                        Design sensing harness complete with accelerometers,
                         strain gauges, and biometric sensors to analyze the
-                        performance of the human-machine system
+                        performance of the highly dynamic human-machine system
                     </p>
                 </div>
             </div>
@@ -274,35 +252,69 @@
                 >
                     Stage 1: Kinematic Synthesis
                 </h2>
+
                 <p
                     style="
-                        color: rgb(0, 65, 0);
-                        max-width: 60rem;
-                        padding-left: 5rem;
                         text-align: left;
+                        padding-left: 15%;
+                        padding-right: 15%;
+                        font-size: 20px;
+                        padding-bottom: 2rem;
+                        color: var(--black);
                     "
                 >
-                    This stage involved the kinematic synthesis of the
-                    suspension linkage using advanced techniques such as
-                    Particle Swarm Optimization and Constrained Optimization.
-                    This process allowed us to eliminate guesswork from the
-                    design process and achieve a highly efficient suspension
-                    system.
+                    A common way to approach vehicle dynamics of a mountain bike
+                    is through software such as Linkage X3 in combination with a
+                    graphical mechanism design software such as Linkage. Most
+                    complex and desireable linkages have an infinite number of
+                    solutions with a complex relationship between leverage ratio
+                    and pivot point locations. The point of this project is to
+                    eliminate the guesswork from this design process.
                 </p>
             </div>
             <div class="image-container">
                 <img
-                    src="media/dh1/Optimized 4bar Path .png"
+                    src="media/dh1/LinkageX3InUsePic.jpeg"
+                    alt="Linkage X3 In Use"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/dh1/LinkageSoftwareComplexMech.jpeg"
                     alt="Optimized 4bar Path"
                     class="rotating-image active"
                 />
-                <img
-                    src="media/dh1/Pareto Front.png"
-                    alt="Pareto Front"
-                    class="rotating-image"
-                />
             </div>
         </section>
+
+        <div class="hero">
+            <h2
+                style="
+                    margin-top: -10rem;
+                    padding-top: 0rem;
+                    color: rgb(0, 65, 0);
+                    text-align: left;
+                    padding-left: 5rem;
+                "
+            >
+                Making this into an optimization problem
+            </h2>
+
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 20px;
+                    padding-bottom: 2rem;
+                    color: var(--black);
+                "
+            >
+                All of the information needed for the design of a high
+                performance downhill mountain bike can be condensed into a few
+                digestable metrics: Overall Leverage ratio, Anti-Rise, Static
+                frame geometry, Stiffness, and
+            </p>
+        </div>
 
         <section id="stage2-section" class="section">
             <div class="text-content">
@@ -331,7 +343,16 @@
                 </p>
             </div>
             <div class="image-container">
-                <!-- Add relevant images for Stage 2 -->
+                <img
+                    src="media/dh1/Optimized 4bar Path .png"
+                    alt="Optimized 4bar Path"
+                    class="rotating-image active"
+                />
+                <img
+                    src="media/dh1/Pareto Front.png"
+                    alt="Pareto Front"
+                    class="rotating-image"
+                />
             </div>
         </section>
 
@@ -361,7 +382,16 @@
                 </p>
             </div>
             <div class="image-container">
-                <!-- Add relevant images for Stage 3 -->
+                <img
+                    src="media/dh1/Optimized 4bar Path .png"
+                    alt="Optimized 4bar Path"
+                    class="rotating-image active"
+                />
+                <img
+                    src="media/dh1/Pareto Front.png"
+                    alt="Pareto Front"
+                    class="rotating-image"
+                />
             </div>
         </section>
 

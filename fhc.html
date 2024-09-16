@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Smart Home Energy Monitor - Eli Page Projects</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
+        <style>
+            :root {
+                --pastelblue: #87a7b4;
+                --dukerduke: #004cff;
+                --pastelyellow: #ffc107;
+                --offwhite: #f5f4f3;
+                --grey: #383838;
+                --black: #000000;
+                --white: #ffffff;
+                --bbsgreen: #000033;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Satoshi-Variable", sans-serif;
+                background: linear-gradient(
+                    to bottom,
+                    var(--offwhite) 0px,
+                    var(--offwhite) 100vh
+                );
+                min-height: 100vh;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            h1,
+            h2,
+            p {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                color: var(--black);
+                font-family: "Satoshi-Variable", sans-serif;
+            }
+
+            h1 {
+                font-weight: 850;
+                font-size: 56px;
+                margin-bottom: 1rem;
+            }
+
+            h2 {
+                font-size: 32px;
+                color: var(--black);
+            }
+
+            p {
+                font-size: 20px;
+                line-height: 1.6;
+                max-width: 80%;
+            }
+
+            .hero {
+                padding: 20vh 5% 10vh;
+                height: 50vh;
+                background-image: url("media/fetalheart/GlowTube.HEIC");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero img {
+                width: 70%;
+                max-width: 800px;
+                height: auto;
+                margin-top: 2rem;
+            }
+
+            .section {
+                display: flex;
+                align-items: center;
+                height: 75vh;
+                padding: 20px;
+                margin-bottom: 2rem;
+            }
+
+            .text-content {
+                flex: 1;
+                max-width: 50%;
+            }
+
+            .image-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+
+            .rotating-image {
+                width: 40rem;
+                height: 30rem;
+                object-fit: cover;
+                border-radius: 20px;
+                position: absolute;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+
+            .rotating-image.active {
+                opacity: 1;
+            }
+
+            .section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <a href="index.html">Eli Page</a>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html#Projects">Projects</a></li>
+                    <li><a href="index.html#Info">Info</a></li>
+                    <li><a href="index.html#Lets-Chat">Let's Chat</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 style="color: white">Fetal Heart Circulation Model</h1>
+            <p style="color: white">Fall 2021</p>
+        </section>
+        <img style="width: 100%; height: auto;"
+
+        <script>
+            function rotateImages() {
+                const containers =
+                    document.querySelectorAll(".image-container");
+                containers.forEach((container) => {
+                    const images =
+                        container.querySelectorAll(".rotating-image");
+                    let currentIndex = 0;
+
+                    setInterval(() => {
+                        images[currentIndex].classList.remove("active");
+                        currentIndex = (currentIndex + 1) % images.length;
+                        images[currentIndex].classList.add("active");
+                    }, 3000);
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", rotateImages);
+        </script>
+    </body>
+</html>

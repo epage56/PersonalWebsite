@@ -3,24 +3,117 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Alternating Sections Webpage</title>
+        <title>Eli Page - Net</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
         <style>
+            :root {
+                /* Colors */
+                --pastelblue: #87a7b4;
+                --dukerduke: #004cff;
+                --pastelyellow: #ffc107;
+                --offwhite: #f5f4f3;
+                --grey: #383838;
+                --black: #000000;
+                --white: #ffffff;
+                --bbsgreen: #000033;
+            }
+
             body {
-                font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                box-sizing: border-box;
+                font-family: "Satoshi-Variable", sans-serif;
+                background: linear-gradient(
+                    to bottom,
+                    var(--white) 0px,
+                    var(--white) 100vh
+                );
+                min-height: 100vh;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            h1,
+            h2,
+            p {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                color: var(--offwhite);
+                font-family: "ApocRevelations-Regular", sans-serif;
+            }
+
+            h1 {
+                font-weight: 850;
+                font-size: 56px;
+                margin-bottom: 1rem;
+            }
+
+            h2 {
+                font-size: 32px;
+                color: white;
+            }
+
+            p {
+                font-family: "Satoshi-Variable";
+                font-size: 20px;
+                color: white;
+                line-height: 1.6;
+                max-width: 80%;
+            }
+
+            .hero {
+                padding: 20vh 5% 10vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero-content {
+                background-color: rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                ); /* semi-transparent background for better text visibility */
+                padding: 2rem;
+                border-radius: 10px;
+            }
+
+            .hero h1 {
+                font-size: 56px;
+                color: white;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 20px;
+                color: white;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "ApocRevelations-Regular", sans-serif;
+                background-color: var(--offwhite);
+                min-height: 100vh;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
             }
             .section {
                 display: flex;
                 align-items: center;
                 height: 75vh;
-                padding: 20px;
+                padding: 1rem;
+                margin-bottom: 0rem;
             }
             .text-content {
                 flex: 1;
-                max-width: 33%;
-                padding: 20px;
+                max-width: 50%;
             }
             .image-container {
                 flex: 1;
@@ -28,11 +121,10 @@
                 justify-content: center;
                 align-items: center;
                 position: relative;
-                height: 100%;
             }
             .rotating-image {
-                width: 300px;
-                height: 300px;
+                width: 40rem;
+                height: 30rem;
                 object-fit: cover;
                 border-radius: 20px;
                 position: absolute;
@@ -48,34 +140,64 @@
         </style>
     </head>
     <body>
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <a href="index.html">Eli Page</a>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html#Projects">Projects</a></li>
+                    <li><a href="index.html#Info">Info</a></li>
+                    <li><a href="index.html#Lets-Chat">Let's Chat</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1 style="color: rgb(0, 65, 0)">A Net</h1>
+            <p style="color: rgb(0, 65, 0)">
+                For my girlfriend, whose name is Annette
+            </p>
+        </section>
+
         <div class="section">
             <div class="text-content">
-                <h2>Section 1 Heading</h2>
-                <p>
-                    This is the paragraph text for section 1. It has a max width
-                    of about a third of the page. The content here can be
-                    customized as needed.
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Lamination + CNC
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    I laminated a couple pieces of wood I found laying around
+                    the student maker space together so that I could have a
+                    thick enough stock to cut the net out. After doing this I
+                    quickly CAD'd up a 3d representaiton of the nicest wooden
+                    trout net I couild find on the internet. After routing out
+                    the profile on the shopbot I got to work sanding away.
                 </p>
             </div>
             <div class="image-container">
                 <img
-                    src="media/joris/20220805_163653.jpg"
+                    style="padding-left: 0rem; margin-left: 0rem"
+                    src="media/anet/cuttingout.jpeg"
                     alt="Image 1"
                     class="rotating-image active"
                 />
                 <img
-                    src="media/joris/CutOutVive.png"
+                    src="media/anet/cuttingout.jpeg"
                     alt="Image 2"
-                    class="rotating-image"
-                />
-                <img
-                    src="media/joris/From Afar, One Side removed.jpg"
-                    alt="Image 3"
-                    class="rotating-image"
-                />
-                <img
-                    src="media/joris/Up Close of Mount.jpg"
-                    alt="Image 4"
                     class="rotating-image"
                 />
             </div>
@@ -83,32 +205,91 @@
 
         <div class="section">
             <div class="text-content">
-                <h2>Section 2 Heading</h2>
-                <p>
-                    This is the paragraph text for section 2. It's on the left
-                    side now, with the image on the right. The layout alternates
-                    for each section.
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Sanding and Staining
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    After many hours sanding I finally got the profile of the
+                    net where I wnanted it. Then it was time to stain the wood
+                    and cover it in a waterproof varnish. I used a couple of old
+                    laquers on top of eachother to acheive a nice brown that
+                    could protect the wood from scratches and water damage.
                 </p>
             </div>
             <div class="image-container">
                 <img
-                    src="/api/placeholder/300/300"
+                    src="media/anet/staindry.jpeg"
                     alt="Image 1"
                     class="rotating-image active"
                 />
                 <img
-                    src="/api/placeholder/300/300"
+                    src="media/anet/staincan.jpeg"
                     alt="Image 2"
                     class="rotating-image"
                 />
                 <img
-                    src="/api/placeholder/300/300"
+                    src="media/anet/staincan1.jpeg"
                     alt="Image 3"
                     class="rotating-image"
                 />
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Weaving the Net
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    Finally it was time for the net to go into the frame I had
+                    spent days making. I chose to weave my own net because I
+                    thought it would look nicer and fit better than a store
+                    bought rubber net. This was definatly the most time
+                    consuming step.
+                </p>
+            </div>
+            <div class="image-container">
                 <img
-                    src="/api/placeholder/300/300"
-                    alt="Image 4"
+                    src="media/anet/knotupclose.jpeg"
+                    alt="Image 1"
+                    class="rotating-image active"
+                />
+                <img
+                    src="media/anet/tying1.jpeg"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/anet/finished.jpeg"
+                    alt="Image 3"
                     class="rotating-image"
                 />
             </div>

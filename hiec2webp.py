@@ -11,6 +11,10 @@ def convert_to_webp(input_folder):
         print(f"Error: The directory '{input_folder}' does not exist.")
         return
 
+    # Create a new folder for compressed versions
+    compressed_folder = os.path.join(input_folder, "compressed_version")
+    os.makedirs(compressed_folder, exist_ok=True)
+
     # Supported input formats
     supported_formats = ('.jpg', '.jpeg', '.png', '.tiff', '.heic')
 
@@ -19,13 +23,12 @@ def convert_to_webp(input_folder):
         if filename.lower().endswith(supported_formats):
             input_path = os.path.join(input_folder, filename)
             output_filename = os.path.splitext(filename)[0] + '.webp'
-            output_path = os.path.join(input_folder, output_filename)
+            output_path = os.path.join(compressed_folder, output_filename)
 
             try:
                 # Open the image and preserve EXIF data
                 with Image.open(input_path) as img:
                     # Rotate the image according to EXIF orientation
-                    img = Image.open(input_path)
                     if hasattr(img, '_getexif'):
                         exif = img._getexif()
                         if exif is not None:
@@ -44,7 +47,7 @@ def convert_to_webp(input_folder):
                     # Save as WebP
                     img.save(output_path, 'WEBP', quality=85)  # Adjust quality as needed
 
-                print(f"Converted '{filename}' to '{output_filename}'")
+                print(f"Converted '{filename}' to '{output_filename}' in compressed_version folder")
             except Exception as e:
                 print(f"Failed to convert '{filename}': {e}")
 

@@ -231,11 +231,11 @@
             }
 
             function loadImages() {
-                fetch("media/fetalheart/images.json")
+                fetch("media/fetalheart/compressed_version/images.json")
                     .then((response) => response.json())
                     .then((data) => {
                         const collage = document.getElementById("imageCollage");
-                        const imagePath = "media/fetalheart/";
+                        const imagePath = "media/fetalheart/compressed_version";
 
                         // Randomize the order of images
                         const shuffledImages = data.images.sort(

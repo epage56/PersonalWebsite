@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Smart Home Energy Monitor - Eli Page Projects</title>
+        <title>Fetal Heart Circulation Model - Eli Page Projects</title>
         <link rel="stylesheet" href="styles.css" />
         <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
         <script src="script.js"></script>
@@ -120,6 +120,57 @@
             .section:nth-child(even) {
                 flex-direction: row-reverse;
             }
+
+            .large-image-container,
+            .video-container {
+                width: 80%;
+                margin: 0rem auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .large-image-container img,
+            .video-container video {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .image-collage {
+                width: 80%;
+                margin: 1rem auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-auto-rows: 20rem;
+                grid-auto-flow: dense;
+                gap: 1rem;
+            }
+
+            .image-collage img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .image-collage img:hover {
+                transform: scale(1.05);
+                z-index: 1;
+            }
+
+            .image-collage .wide {
+                grid-column: span 2;
+            }
+
+            .image-collage .tall {
+                grid-row: span 2;
+            }
+
+            .image-collage .big {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
         </style>
     </head>
     <body>
@@ -140,7 +191,27 @@
             <h1 style="color: white">Fetal Heart Circulation Model</h1>
             <p style="color: white">Fall 2021</p>
         </section>
-        <img style="width: 100%; height: auto;"
+
+        <div class="large-image-container">
+            <img
+                src="media/fetalheart/Fetal Heart Circulation Final Poster.jpg"
+                alt="Fetal Heart Circulation Final Poster"
+            />
+        </div>
+
+        <div class="video-container">
+            <video id="autoplayVideo" muted playsinline>
+                <source
+                    src="media/fetalheart/01 - Smooth Final Assembly Fetal Heart Model Animation.mp4"
+                    type="video/mp4"
+                />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div id="imageCollage" class="image-collage">
+            <!-- Images will be loaded here -->
+        </div>
 
         <script>
             function rotateImages() {
@@ -159,7 +230,64 @@
                 });
             }
 
-            document.addEventListener("DOMContentLoaded", rotateImages);
+            function loadImages() {
+                fetch("media/fetalheart/images.json")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const collage = document.getElementById("imageCollage");
+                        const imagePath = "media/fetalheart/";
+
+                        // Randomize the order of images
+                        const shuffledImages = data.images.sort(
+                            () => 0.5 - Math.random(),
+                        );
+
+                        shuffledImages.forEach((filename) => {
+                            if (!filename.endsWith(".mp4")) {
+                                // Skip video files
+                                const img = document.createElement("img");
+                                img.src = imagePath + filename;
+                                img.alt = "Fetal Heart Image";
+
+                                // Randomly assign size classes
+                                const random = Math.random();
+                                if (random < 0.2) {
+                                    img.classList.add("wide");
+                                } else if (random < 0.4) {
+                                    img.classList.add("tall");
+                                } else if (random < 0.5) {
+                                    img.classList.add("big");
+                                }
+
+                                collage.appendChild(img);
+                            }
+                        });
+                    })
+                    .catch((error) =>
+                        console.error("Error loading images:", error),
+                    );
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                rotateImages();
+                loadImages();
+
+                const video = document.getElementById("autoplayVideo");
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                video.play();
+                            } else {
+                                video.pause();
+                            }
+                        });
+                    },
+                    { threshold: 0.5 },
+                );
+
+                observer.observe(video);
+            });
         </script>
     </body>
 </html>

@@ -22,8 +22,21 @@ def convert_to_webp(input_folder):
             output_path = os.path.join(input_folder, output_filename)
 
             try:
-                # Open the image
+                # Open the image and preserve EXIF data
                 with Image.open(input_path) as img:
+                    # Rotate the image according to EXIF orientation
+                    img = Image.open(input_path)
+                    if hasattr(img, '_getexif'):
+                        exif = img._getexif()
+                        if exif is not None:
+                            orientation = exif.get(274, 1)  # 274 is the orientation tag
+                            if orientation == 3:
+                                img = img.rotate(180, expand=True)
+                            elif orientation == 6:
+                                img = img.rotate(270, expand=True)
+                            elif orientation == 8:
+                                img = img.rotate(90, expand=True)
+
                     # Convert to RGB mode if necessary
                     if img.mode not in ('RGB', 'RGBA'):
                         img = img.convert('RGB')

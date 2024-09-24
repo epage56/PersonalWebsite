@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Eli Page - Custom CNC Cases</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
+        <style>
+            :root {
+                /* Colors */
+                --pastelblue: #87a7b4;
+                --dukerduke: #004cff;
+                --pastelyellow: #ffc107;
+                --offwhite: #f5f4f3;
+                --grey: #383838;
+                --black: #000000;
+                --white: #ffffff;
+                --bbsgreen: #000033;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Satoshi-Variable", sans-serif;
+                background: linear-gradient(
+                    to bottom,
+                    var(--white) 0px,
+                    var(--white) 100vh
+                );
+                min-height: 100vh;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            h1,
+            h2,
+            p {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                color: var(--offwhite);
+                font-family: "ApocRevelations-Regular", sans-serif;
+            }
+
+            h1 {
+                font-weight: 850;
+                font-size: 56px;
+                margin-bottom: 1rem;
+            }
+
+            h2 {
+                font-size: 32px;
+                color: white;
+            }
+
+            p {
+                font-family: "Satoshi-Variable";
+                font-size: 20px;
+                color: white;
+                line-height: 1.6;
+                max-width: 80%;
+            }
+
+            .hero {
+                height: 100vh;
+                background-image: url("media/joris/compressed_version/From\ Afar\,\ One\ Side\ removed.webp");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero-content {
+                background-color: rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                ); /* semi-transparent background for better text visibility */
+                padding: 2rem;
+                border-radius: 10px;
+            }
+
+            .hero h1 {
+                font-size: 56px;
+                color: white;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 20px;
+                color: white;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "ApocRevelations-Regular", sans-serif;
+                background-color: var(--offwhite);
+                min-height: 100vh;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+            .hero img {
+                width: 20rem;
+                max-width: 50rem; /
+                height: auto;
+                margin-top: 2rem;
+                margin-left: 0rem;
+            }
+            .section {
+                display: flex;
+                align-items: center;
+                height: 75vh;
+                padding: 20px;
+                margin-bottom: 2rem;
+            }
+            .text-content {
+                flex: 1;
+                max-width: 50%;
+            }
+            .image-container {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+            .rotating-image {
+                width: 40rem;
+                height: 30rem;
+                object-fit: cover;
+                border-radius: 20px;
+                position: absolute;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            .rotating-image.active {
+                opacity: 1;
+            }
+            .section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <a href="index.html">Eli Page</a>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html#Projects">Projects</a></li>
+                    <li>
+                        <a href="mailto:elipage236@gmail.com">Let's Chat</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1
+                style="
+                    color: rgb(0, 65, 0);
+                    padding: 0rem;
+                    margin: 0rem;
+                    justify-items: left;
+                    margin-top: -30rem;
+                    padding-left: 5rem;
+                "
+            >
+                VR Headset Stand
+            </h1>
+            <p
+                style="
+                    color: rgb(0, 65, 0);
+                    padding: 0rem;
+                    margin: 0rem;
+                    padding-left: 50%;
+                    padding-right: 15rem;
+                    max-width: 7rem;
+                    padding-top: 75vh;
+                "
+            >
+                Inspired by Joris Laarman
+            </p>
+        </section>
+
+        <!-- New sections start here -->
+        <div class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Mirroring Curves
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    REPLACE WITH CNC CASE FIRST BLURB brainstorming ways to make
+                    this headset stand futuristic and organic, I realized there
+                    was an opportunity to include subtle branding to match the
+                    headset that was to be docked on it. I eventually settled on
+                    making the base of the arms of the stand the shape of the
+                    VIVE Logo. Here you can see this logo integration as well
+                    the initial choice to use a manakin head as the main
+                    structure with arms to hold the remotes of the headsets.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    style="padding-left: 0rem; margin-left: 0rem"
+                    src="media/cnccases/compressed_version/XSTECH-PRODUCT-CLOSEUPHeader2.webp"
+                    alt="Image 1"
+                    class="rotating-image active"
+                />
+                <img
+                    src="media/cnccases/compressed_version/IMG_4813_edited.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/cnccases/compressed_version/IMG_4790.webp"
+                    alt="Image 3"
+                    class="rotating-image"
+                />
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Cutting Foam
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    Discuss matching the draft angle of the cases and how I used
+                    scaling about the center so that my inserts were also
+                    scaled. I loved how the arms looked from all different
+                    angles but the arms were not strong enough. I knew I needed
+                    another piece of supporting geometry in the arms, and I
+                    wanted it to be optimally placed. To solve this problem I
+                    turned to Finite Element Method simulations. With the
+                    combined help of simulation and real world testing I was
+                    able to perfectly place supporting geometry to make as
+                    strong of a part as possible without sacrificing the looks I
+                    was going for.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="media/cnccases/compressed_version/IMG_4814.webp"
+                    alt="Image 1"
+                    class="rotating-image active"
+                />
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Assebmly
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    After presenting my work to the Multimedia Studio I received
+                    some feedback about the user experience of the stand. The
+                    stand was not intuitive to use. Many testers could not
+                    figure out how to correctly place the remote on the stand. I
+                    replaced the two pronged design shown above for a flanged
+                    cylindrical cap. This design draws users to place the
+                    remotes correctly on the stand and had a perfect score in
+                    testing. The two-piece design also means this high wear
+                    element can easily be eplaced or refinished as needed.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="media/joris/thirdblock/compressed_version/Screen Shot 2022-07-31 at 1.22.33 AM.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Final Touches
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    Meeting one last time with the client before production, we
+                    decided the arms would be printed out of Tough 2000 Resin
+                    for its durable and consistent prints when compared to ABS
+                    or PLA. After printing the arms and flanged caps, I sanded
+                    the surface smooth and applied several layers of clear coat
+                    to protect the arms against scratches. I designed the
+                    flanged caps to be press fit, and used glue to make sure
+                    they were properly attached to the stand.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="media/cnccases/compressed_version/IMG_4815_edited.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/cnccases/compressed_version/IMG_5183.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/cnccases/compressed_version/IMG_5179.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/cnccases/compressed_version/IMG_5170.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                />
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Final Product
+                </h2>
+
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    Before delivery to the client, the stands were rigorously
+                    tested to ensure that all of the design criteria were
+                    satisfied. In addition, the stands have been in use for over
+                    6 weeks without any failure or heavy wear. There has been
+                    only ONE instance where the remotes were put on the stand
+                    incorrectly before closing.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="media/cnccases/compressed_version/IMG_4815_edited.webp"
+                    alt="Image 1"
+                    class="rotating-image"
+                    style="height: 50rem; width: 40rem; object-fit: contain"
+                />
+                <img
+                    src="media/cnccases/compressed_version/XSTECH-PRODUCT-CLOSEUPHeader2.webp"
+                    alt="Image 2"
+                    class="rotating-image"
+                    style="height: 50rem; width: 40rem; object-fit: contain"
+                />
+            </div>
+        </div>
+
+        <script>
+            function rotateImages() {
+                const containers =
+                    document.querySelectorAll(".image-container");
+                containers.forEach((container) => {
+                    const images =
+                        container.querySelectorAll(".rotating-image");
+                    let currentIndex = 0;
+
+                    setInterval(() => {
+                        images[currentIndex].classList.remove("active");
+                        currentIndex = (currentIndex + 1) % images.length;
+                        images[currentIndex].classList.add("active");
+                    }, 3000);
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", rotateImages);
+        </script>
+    </body>
+</html>

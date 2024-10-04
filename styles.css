@@ -249,12 +249,13 @@ body {
 
 .headshot-container {
     position: absolute;
-    top: 10rem;
-    right: 10rem;
+    top: 15vh;
+    right: 10%;
 }
 
 .headshot {
-    width: 30rem; /* Adjust as needed */
+    width: 35vw; /* Adjust as needed */
+    min-width: 20rem;
     height: auto;
     border-radius: 0.5rem; /* Slightly rounded corners */
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25); /* Shadow around the image */

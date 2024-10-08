@@ -170,6 +170,24 @@
                     flex-basis: 100%;
                 }
             }
+
+            .progress-banner {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: black;
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                font-size: 2rem;
+                font-weight: bold;
+                z-index: 1000;
+            }
+
+            .progress-banner p {
+                margin: 0;
+            }
         </style>
     </head>
     <body>
@@ -222,9 +240,9 @@
             >
                 The goal of this project is to design a low cost 6 DOF robotic
                 arm. The project includes everything from harmonic drive design
-                to task planning. The most noteable feature of this robot is its
-                impedence control with low cost hardware and the flexure based
-                end affector design.
+                to task planning. The most notable feature of this robot is its
+                impedance control with low cost hardware and the flexure based
+                end effector design.
             </p>
         </section>
 
@@ -253,13 +271,13 @@
                     The idea for this project came about when I was working on a
                     backdrivable high gear ratio hand crank fan for a class
                     project where my team was designing 1-D electromechanical
-                    Flappy Bird. Shortly after prototpying a harmonic drive for
+                    Flappy Bird. Shortly after prototyping a harmonic drive for
                     the manual fan, I realized that it was quite an elegant
                     design because of its low part count and low cost. Shortly
-                    after, I jumped into making this robotic arm. The harmonic
-                    drive is designed around PLA and I chose to make the tooth
-                    profile involute, althought from my ressearch it was unlcear
-                    if this was the optimal choice for harmonic drives.
+                    afterwards, I jumped into making this robotic arm. The
+                    harmonic drive is designed around PLA and I chose to make
+                    the tooth profile involute, although from my research it was
+                    unclear if this was the optimal choice for harmonic drives.
                 </p>
             </div>
             <div
@@ -347,7 +365,7 @@
                     text-align: center;
                 "
             >
-                Week 3: Creep and electronics
+                Week 3: Creep and Flexures
             </h2>
             <p
                 style="
@@ -366,7 +384,7 @@
                 forward: creep is a function of stress and therefore if I can
                 minimize stress then I can minimize creep. I have already
                 optimized the gearbox for as little strain as possible, so I
-                have to choose a material with a low youngs modulus to minimize
+                have to choose a material with a low Young's modulus to minimize
                 stress for the strain levels I am driving. (Graph from
                 <a
                     href="https://hcied.info/papers/pgmfilament-composite23.pdf"
@@ -382,6 +400,23 @@
                 src="media/robot/compressed_version/TPUvPLAstressstrain.webp"
                 alt="Stress Analysis Results"
             />
+
+            <p
+                style="
+                    text-align: left;
+                    padding-top: 5rem;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 20px;
+                    padding-bottom: 2rem;
+                    color: var(--black);
+                "
+            >
+                In addition to discovering this creep issue, I also spent time
+                finishing the design for the the arm's base and also started to
+                explore flexure designs for different gripper mechanisms and/or
+                joints.
+            </p>
         </div>
 
         <section id="stage3-section" class="section">
@@ -404,7 +439,7 @@
                     "
                 >
                     I decided in Week 2 that I would use the FOC library to
-                    drive all the steppers becasue I happen to find this example
+                    drive all the steppers because I happen to find this example
                     of a torque controlled stepper with the super common L298N
                     motor driver. Using this setup works out to be about 12
                     dollars per motor with encoder and driver which is a whole

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-6GCHZFHYRR"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-6GCHZFHYRR");
+        </script>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CNC Router Cases - Eli Page Hardware</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <style>
+            <style > :root {
+                --pastelblue: #87a7b4;
+                --dukerduke: #004cff;
+                --pastelyellow: #ffc107;
+                --offwhite: #f5f4f3;
+                --grey: #383838;
+                --black: #000000;
+                --white: #ffffff;
+                --bbsgreen: #000033;
+            }
+
+            html,
+            body {
+                background: var(--white) !important;
+                min-height: 100%;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Satoshi-Variable", sans-serif;
+                scroll-behavior: smooth;
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            .hero-box {
+                margin: 6rem 10% 3rem;
+                display: flex;
+                align-items: center;
+                background-color: var(--white);
+                padding: 3rem;
+                border-radius: 15px;
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .hero-box img {
+                width: 450px;
+                height: auto;
+                margin-right: 3rem;
+            }
+
+            .hero-text h1 {
+                color: var(--bbsgreen);
+                margin-bottom: 0.75rem;
+                font-size: 2.6rem;
+                text-align: left;
+            }
+
+            .hero-text p {
+                color: var(--grey);
+                font-size: 1.3rem;
+                text-align: left;
+            }
+
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+                gap: 2rem;
+                margin: 3rem 10%;
+            }
+
+            .image-item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                aspect-ratio: 4 / 3;
+            }
+
+            .image-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .image-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .image-overlay p {
+                color: var(--white);
+                text-align: center;
+                padding: 1rem;
+                font-size: 1.4rem;
+            }
+
+            .image-item:hover img {
+                transform: scale(1.1);
+            }
+
+            .image-item:hover .image-overlay {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <div class="branding">
+                    <a href="index.html">Eli Page</a>
+                    <span class="b-subclass"></span>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="index.html#Projects">Projects</a></li>
+                    <li>
+                        <a href="mailto:elipage236@gmail.com">Let's Chat</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="hero-box" style="height: 40vh; overflow: hidden">
+            <img
+                src="media/Motorsports/compressed_version/motorsportslogo.webp"
+                alt="CNC Case"
+                style="height: 50%; width: auto; object-fit: cover"
+            />
+            <div class="hero-text">
+                <h1>Duke Motorsports</h1>
+                <p>
+                    During my freshman, sophomore, and junior years at Duke
+                    University, I was an active member on the Formula SAE (FSAE)
+                    team. Most of my time was spent on the aerodynamics and
+                    powertrain subsystems of the car. One project that I got to
+                    spearhead while on the team was the desing of the teams
+                    first custom steering wheel. Below, there are some more
+                    pictures and details about the proecjts I was involved with
+                    while on the team.
+                </p>
+            </div>
+        </div>
+            <div class="image-grid">
+                <div class="image-item">
+                    <img
+                        src="media/Motorsports/compressed_version/IMG_9922.webp"
+                        alt="Design Sketch"
+                    />
+                    <div class="image-overlay">
+                        <p>Steering Wheel</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img
+                        src="media/Motorsports/layups/compressed_version/seatvacuumlayup.webp"
+                        alt="Seat Layup"
+                    />
+                    <div class="image-overlay">
+                        <p>Layups</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img
+                        src="media/Motorsports/eliwelding/compressed_version/IMG_6382.webp"
+                        alt="Welding Dyno Cage"
+                    />
+                    <div class="image-overlay">
+                        <p>Dyno Cage</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img
+                        src="media/Motorsports/compressed_version/weldedintake2.webp"
+                        alt="Welded Intake"
+                    />
+                    <div class="image-overlay">
+                        <p>Naturally Aspirated Intake</p>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img
+                        src="media/Motorsports/compressed_version/RicardoWaveLogo.webp"
+                        alt="Final Assembly"
+                    />
+                    <div class="image-overlay">
+                        <p>Ricardo WAVE Turbo Evaluation Study</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="sticky-footer">
+            <a
+                href="https://www.dukechronicle.com/article/2023/04/duke-ldoc-headliner-concert-2023-nle-choppa-070-shake-cafune#:~:text=NEWS%20%7C%20UNIVERSITY-,NLE%20Choppa%20to%20headline%202023%20LDOC%20concert%2C%20along%20with,by%20070%20Shake%20and%20Cafuné"
+                >press</a
+            >
+            // <a href="https://github.com/epage56">github</a> //
+            <a href="https://www.linkedin.com/in/elipage/">linkedin</a>
+        </footer>
+
+        <script>
+            // Fade-in effect
+            document.addEventListener("DOMContentLoaded", () => {
+                document.body.style.opacity = 1;
+            });
+
+            // Smooth scroll
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+        </script>
+    </body>
+</html>

@@ -20,7 +20,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>CNC Router Cases - Eli Page Hardware</title>
         <link rel="stylesheet" href="styles.css" />
-        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
         <style>
             <style > :root {
                 --pastelblue: #87a7b4;
@@ -227,19 +226,6 @@
             document.addEventListener("DOMContentLoaded", () => {
                 document.body.style.opacity = 1;
             });
-
-            // Smooth scroll
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            });
-
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-
-            requestAnimationFrame(raf);
         </script>
     </body>
 </html>

@@ -18,11 +18,13 @@
 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CNC Router Cases - Eli Page Hardware</title>
+        <title>Robotic Arm Project</title>
         <link rel="stylesheet" href="styles.css" />
         <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+        <script src="script.js"></script>
         <style>
-            <style > :root {
+            :root {
+                /* Colors */
                 --pastelblue: #87a7b4;
                 --dukerduke: #004cff;
                 --pastelyellow: #ffc107;
@@ -33,98 +35,140 @@
                 --bbsgreen: #000033;
             }
 
-            html,
-            body {
-                background: var(--white) !important;
-                min-height: 100%;
-            }
-
             body {
                 margin: 0;
                 padding: 0;
                 font-family: "Satoshi-Variable", sans-serif;
+                background: linear-gradient(
+                    to bottom,
+                    var(--offwhite) 0px,
+                    var(--offwhite) 100vh
+                );
+                min-height: 100vh;
                 scroll-behavior: smooth;
                 opacity: 0;
                 transition: opacity 0.5s ease-in-out;
             }
 
-            .hero-box {
-                margin: 6rem 10% 3rem;
+            h1,
+            h2,
+            p {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                color: var(--offwhite);
+                font-family: "Satoshi-Variable", sans-serif;
+            }
+
+            h1 {
+                font-weight: 850;
+                font-size: 56px;
+                margin-bottom: 1rem;
+            }
+
+            h2 {
+                font-size: 32px;
+                color: white;
+            }
+
+            p {
+                font-family: "Satoshi-Variable";
+                font-size: 15px;
+                color: white;
+                line-height: 1.6;
+                max-width: 80%;
+            }
+
+            .hero {
+                padding: 20vh 5% 10vh;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                background-color: var(--white);
-                padding: 3rem;
-                border-radius: 15px;
-                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+                justify-content: center;
+                text-align: center;
             }
 
-            .hero-box img {
-                width: 450px;
+            .hero img {
+                width: 70%;
+                max-width: 800px;
                 height: auto;
-                margin-right: 3rem;
+                margin-top: 2rem;
             }
 
-            .hero-text h1 {
-                color: var(--bbsgreen);
-                margin-bottom: 0.75rem;
-                font-size: 2.6rem;
-                text-align: left;
+            .container {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10%;
+                gap: 2%;
             }
 
-            .hero-text p {
-                color: var(--grey);
-                font-size: 1.3rem;
-                text-align: left;
-            }
-
-            .image-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-                gap: 2rem;
-                margin: 3rem 10%;
-            }
-
-            .image-item {
-                position: relative;
-                overflow: hidden;
+            .box {
+                flex-basis: 22%;
+                background-color: var(--black);
                 border-radius: 10px;
-                aspect-ratio: 4 / 3;
-            }
-
-            .image-item img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin: 10px 0;
+                cursor: pointer;
                 transition: transform 0.3s ease;
             }
 
-            .image-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.7);
+            .box:hover {
+                transform: scale(1.05);
+            }
+
+            .section {
+                display: flex;
+                align-items: center;
+                height: 75vh;
+                padding: 20px;
+                margin-bottom: 2rem;
+            }
+
+            .text-content {
+                flex: 1;
+                max-width: 50%;
+            }
+
+            .image-container {
+                flex: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                position: relative;
+            }
+
+            .rotating-image {
+                width: 40rem;
+                height: 30rem;
+                object-fit: cover;
+                border-radius: 20px;
+                position: absolute;
                 opacity: 0;
-                transition: opacity 0.3s ease;
+                transition: opacity 1s ease-in-out;
             }
 
-            .image-overlay p {
-                color: var(--white);
-                text-align: center;
-                padding: 1rem;
-                font-size: 1.4rem;
-            }
-
-            .image-item:hover img {
-                transform: scale(1.1);
-            }
-
-            .image-item:hover .image-overlay {
+            .rotating-image.active {
                 opacity: 1;
+            }
+
+            .section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    flex-wrap: wrap;
+                }
+                .box {
+                    flex-basis: 45%;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .box {
+                    flex-basis: 100%;
+                }
             }
         </style>
     </head>
@@ -133,7 +177,6 @@
             <nav class="navbar">
                 <div class="branding">
                     <a href="index.html">Eli Page</a>
-                    <span class="b-subclass"></span>
                 </div>
                 <ul class="nav-list">
                     <li><a href="index.html#Projects">Projects</a></li>
@@ -144,16 +187,17 @@
             </nav>
         </header>
 
-        <div class="hero-box">
+        <section class="hero">
             <img
-                src="media/cnccases/compressed_version/XSTECH-PRODUCT-CLOSEUPHeader2.webp"
-                alt="CNC Case"
+                src="media/robot/compressed_version/GearBoxCircleCropCad.webp"
+                alt="Robotic Arm Overview"
+                style="height: 40vh; width: auto"
             />
-            <div class="hero-text">
-                <h1>CNC Router Cases</h1>
-                <p>Precision. Protection. Performance.</p>
-            </div>
-        </div>
+            <h1 style="color: rgb(0, 0, 0)">Robotic Arm</h1>
+            <p style="color: rgb(0, 0, 0); font-size: 20px">
+                Low cost and high precision cobot for automated pipetting
+            </p>
+        </section>
 
         <section>
             <h1
@@ -161,10 +205,10 @@
                     text-align: left;
                     padding-left: 15%;
                     padding-right: 15%;
-                    font-size: 32px;
+                    color: var(--black);
                 "
             >
-                Case Design Process
+                Full Stack
             </h1>
             <p
                 style="
@@ -173,81 +217,242 @@
                     padding-right: 15%;
                     font-size: 20px;
                     padding-bottom: 2rem;
+                    color: var(--black);
                 "
             >
-                The design process for these CNC router cases involved careful
-                consideration of materials, ergonomics, and functionality. Each
-                case was tailored to the specific CNC router model while
-                maintaining a consistent design language across the product
-                line.
+                The goal of this project is to design a low cost 6 DOF robotic
+                arm. The project includes everything from harmonic drive design
+                to task planning. The most noteable feature of this robot is its
+                impedence control with low cost hardware and the flexure based
+                end affector design.
             </p>
-            <div class="image-grid">
-                <div class="image-item">
-                    <img
-                        src="media/cnccases/compressed_version/IMG_4813_edited.webp"
-                        alt="Design Sketch"
-                    />
-                    <div class="image-overlay">
-                        <p>Initial Design Sketches</p>
-                    </div>
-                </div>
-                <div class="image-item">
-                    <img
-                        src="media/cnccases/compressed_version/IMG_4790.webp"
-                        alt="3D Modeling"
-                    />
-                    <div class="image-overlay">
-                        <p>3D Modeling and Prototyping</p>
-                    </div>
-                </div>
-                <div class="image-item">
-                    <img
-                        src="media/cnccases/compressed_version/IMG_4814.webp"
-                        alt="Material Selection"
-                    />
-                    <div class="image-overlay">
-                        <p>Material Selection and Testing</p>
-                    </div>
-                </div>
-                <div class="image-item">
-                    <img
-                        src="media/cnccases/compressed_version/IMG_4815_edited.webp"
-                        alt="Final Assembly"
-                    />
-                    <div class="image-overlay">
-                        <p>Final Assembly and Quality Control</p>
-                    </div>
-                </div>
+        </section>
+
+        <section id="stage1-section" class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 0, 0);
+                        text-align: left;
+                        padding-left: 10%;
+                    "
+                >
+                    Week 1: Gearbox Concept
+                </h2>
+
+                <p
+                    style="
+                        text-align: left;
+                        padding-left: 10%;
+                        padding-right: 10%;
+                        font-size: 20px;
+                        padding-bottom: 2rem;
+                        color: var(--black);
+                    "
+                >
+                    The idea for this project came about when I was working on a
+                    backdrivable high gear ratio hand crank fan for a class
+                    project where my team was designing 1-D electromechanical
+                    Flappy Bird. Shortly after prototpying a harmonic drive for
+                    the manual fan, I realized that it was quite an elegant
+                    design because of its low part count and low cost. Shortly
+                    after, I jumped into making this robotic arm. The harmonic
+                    drive is designed around PLA and I chose to make the tooth
+                    profile involute, althought from my ressearch it was unlcear
+                    if this was the optimal choice for harmonic drives.
+                </p>
+            </div>
+            <div
+                class="image-container"
+                style="
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    width: 20rem;
+                    height: 40rem;
+                    overflow: hidden;
+                    border-radius: 20px;
+                "
+            >
+                <img
+                    src="media/robot/StrainWaveDriving.gif"
+                    alt="Strain Wave Gif"
+                    class="rotating-image active"
+                    style="
+                        width: 25rem;
+                        height: 30rem;
+                        object-fit: cover;
+                        object-position: center;
+                    "
+                />
             </div>
         </section>
 
-        <footer class="sticky-footer">
-            <a
-                href="https://www.dukechronicle.com/article/2023/04/duke-ldoc-headliner-concert-2023-nle-choppa-070-shake-cafune#:~:text=NEWS%20%7C%20UNIVERSITY-,NLE%20Choppa%20to%20headline%202023%20LDOC%20concert%2C%20along%20with,by%20070%20Shake%20and%20Cafuné"
-                >press</a
+        <section id="stage2-section" class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 10%;
+                    "
+                >
+                    Week 2: Modular Actuator
+                </h2>
+                <p
+                    style="
+                        text-align: left;
+                        padding-left: 10%;
+                        padding-right: 10%;
+                        font-size: 20px;
+                        padding-bottom: 2rem;
+                        color: var(--black);
+                    "
+                >
+                    In the second week of this project I worked on refining the
+                    gearbox design and realized that it would my life much
+                    easier if every single joint was modular. I also decided
+                    that the robot arm would be driven by common nema 17
+                    steppers and their position would be determined by magnetic
+                    encoders.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="media/robot/compressed_version/CadFullJoint.webp"
+                    alt="Electronic Components"
+                    class="rotating-image active"
+                />
+                <img
+                    src="media/robot/compressed_version/GearboxOnlyCad.webp"
+                    alt="Wiring Diagram"
+                    class="rotating-image"
+                />
+                <img
+                    src="media/robot/compressed_version/ActuatorCrossection.webp"
+                    alt="Wiring Diagram"
+                    class="rotating-image"
+                />
+            </div>
+        </section>
+
+        <div class="hero">
+            <h2
+                style="
+                    margin-top: -10rem;
+                    padding-top: 0rem;
+                    color: rgb(0, 0, 0);
+                    text-align: center;
+                "
             >
-            // <a href="https://github.com/epage56">github</a> //
-            <a href="https://www.linkedin.com/in/elipage/">linkedin</a>
-        </footer>
+                Week 3: Creep and electronics
+            </h2>
+            <p
+                style="
+                    text-align: left;
+                    padding-left: 15%;
+                    padding-right: 15%;
+                    font-size: 20px;
+                    padding-bottom: 2rem;
+                    color: var(--black);
+                "
+            >
+                My concerns about the strain wave gear creeping were validated.
+                After leaving the actuator assembled overnight, I observed a
+                noticeable 'speed bump' effect that was the strain wave gear
+                being an oval instead of a circle. However, there is a path
+                forward: creep is a function of stress and therefore if I can
+                minimize stress then I can minimize creep. I have already
+                optimized the gearbox for as little strain as possible, so I
+                have to choose a material with a low youngs modulus to minimize
+                stress for the strain levels I am driving. (Graph from
+                <a
+                    href="https://hcied.info/papers/pgmfilament-composite23.pdf"
+                    target="_blank"
+                    style="color: var(--black); text-decoration: underline"
+                >
+                    this</a
+                >
+                paper)
+            </p>
+
+            <img
+                src="media/robot/compressed_version/TPUvPLAstressstrain.webp"
+                alt="Stress Analysis Results"
+            />
+        </div>
+
+        <section id="stage3-section" class="section">
+            <div class="text-content">
+                <h2
+                    style="
+                        color: rgb(0, 65, 0);
+                        text-align: left;
+                        padding-left: 5rem;
+                    "
+                >
+                    Week 4: FOC stepper driving:
+                </h2>
+                <p
+                    style="
+                        color: rgb(0, 65, 0);
+                        max-width: 60rem;
+                        padding-left: 5rem;
+                        text-align: left;
+                    "
+                >
+                    I decided in Week 2 that I would use the FOC library to
+                    drive all the steppers becasue I happen to find this example
+                    of a torque controlled stepper with the super common L298N
+                    motor driver. Using this setup works out to be about 12
+                    dollars per motor with encoder and driver which is a whole
+                    lot cheaper than using BLDC's (100+ per motor/driver combo)
+                    and there is no custom pcb design needed.
+                </p>
+            </div>
+            <div class="image-container">
+                <img
+                    src="path/to/control-algorithm.webp"
+                    alt="Stepper Torque Control GIF"
+                    class="rotating-image active"
+                />
+            </div>
+        </section>
 
         <script>
-            // Fade-in effect
-            document.addEventListener("DOMContentLoaded", () => {
-                document.body.style.opacity = 1;
+            document.addEventListener("DOMContentLoaded", function () {
+                const boxes = document.querySelectorAll(".box");
+                boxes.forEach((box) => {
+                    box.addEventListener("click", function () {
+                        const stageId = this.id;
+                        const sectionId = stageId + "-section";
+                        const section = document.getElementById(sectionId);
+                        if (section) {
+                            section.scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
             });
 
-            // Smooth scroll
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            });
+            function rotateImages() {
+                const containers =
+                    document.querySelectorAll(".image-container");
+                containers.forEach((container) => {
+                    const images =
+                        container.querySelectorAll(".rotating-image");
+                    let currentIndex = 0;
 
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
+                    setInterval(() => {
+                        images[currentIndex].classList.remove("active");
+                        currentIndex = (currentIndex + 1) % images.length;
+                        images[currentIndex].classList.add("active");
+                    }, 3000);
+                });
             }
 
-            requestAnimationFrame(raf);
+            document.addEventListener("DOMContentLoaded", rotateImages);
         </script>
     </body>
 </html>

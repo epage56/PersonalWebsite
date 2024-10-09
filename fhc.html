@@ -215,6 +215,11 @@
             />
         </div>
 
+        <img
+            src="media/fetalheart/compressed_version/FetalHeartModelAssembly.webp"
+            alt="Test Image"
+        />
+
         <div class="video-container">
             <video id="autoplayVideo" muted playsinline>
                 <source
@@ -248,32 +253,44 @@
 
             function loadImages() {
                 fetch("media/fetalheart/compressed_version/images.json")
-                    .then((response) => response.json())
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(
+                                `HTTP error! status: ${response.status}`,
+                            );
+                        }
+                        return response.json();
+                    })
                     .then((data) => {
+                        console.log("JSON data loaded:", data); // Log the loaded data
                         const collage = document.getElementById("imageCollage");
-                        const imagePath = "media/fetalheart/compressed_version";
+                        const imagePath =
+                            "media/fetalheart/compressed_version/";
 
-                        // Randomize the order of images
-                        const shuffledImages = data.images.sort(
-                            () => 0.5 - Math.random(),
-                        );
-
-                        shuffledImages.forEach((filename) => {
+                        data.images.forEach((filename) => {
                             if (!filename.endsWith(".mp4")) {
-                                // Skip video files
                                 const img = document.createElement("img");
                                 img.src = imagePath + filename;
                                 img.alt = "Fetal Heart Image";
+                                img.onerror = function () {
+                                    console.error(
+                                        "Error loading image:",
+                                        img.src,
+                                    );
+                                };
+                                img.onload = function () {
+                                    console.log(
+                                        "Image loaded successfully:",
+                                        img.src,
+                                    );
+                                };
 
-                                // Randomly assign size classes
+                                // Randomly assign size classes (as before)
                                 const random = Math.random();
-                                if (random < 0.2) {
-                                    img.classList.add("wide");
-                                } else if (random < 0.4) {
+                                if (random < 0.2) img.classList.add("wide");
+                                else if (random < 0.4)
                                     img.classList.add("tall");
-                                } else if (random < 0.5) {
-                                    img.classList.add("big");
-                                }
+                                else if (random < 0.5) img.classList.add("big");
 
                                 collage.appendChild(img);
                             }

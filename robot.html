@@ -22,6 +22,22 @@
         <link rel="stylesheet" href="styles.css" />
         <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
         <script src="script.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script
+            id="MathJax-script"
+            async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        ></script>
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [
+                        ["$", "$"],
+                        ["\\(", "\\)"],
+                    ],
+                },
+            };
+        </script>
         <style>
             :root {
                 /* Colors */
@@ -381,11 +397,11 @@
                 After leaving the actuator assembled overnight, I observed a
                 noticeable 'speed bump' effect that was the strain wave gear
                 being an oval instead of a circle. However, there is a path
-                forward: creep is a function of stress and therefore if I can
-                minimize stress then I can minimize creep. I have already
-                optimized the gearbox for as little strain as possible, so I
-                have to choose a material with a low Young's modulus to minimize
-                stress for the strain levels I am driving. (Graph from
+                forward: as shown below, creep is a function of stress;
+                therefore, if I minimize stress then I minimize creep. I have
+                already optimized the gearbox for as little strain as possible,
+                so I have to choose a material with a low Young's modulus to
+                minimize stress for the strain levels I am driving. (Graph from
                 <a
                     href="https://hcied.info/papers/pgmfilament-composite23.pdf"
                     target="_blank"
@@ -395,6 +411,35 @@
                 >
                 paper)
             </p>
+
+            <div
+                style="
+                    text-align: center;
+                    margin-top: -3rem;
+                    margin-bottom: 2rem;
+                    font-size: 20px;
+                "
+            >
+                <p style="font-size: 30px; color: var(--black)">
+                    $$\dot{\varepsilon}_s = K_1 \sigma^n$$
+                </p>
+
+                <p
+                    style="
+                        font-size: 16px;
+                        color: var(--black);
+                        margin-top: 1rem;
+                        padding-left: 15%;
+                        padding-right: 15%;
+                    "
+                >
+                    Where:<br />
+                    $\dot{\varepsilon}_s$ is the SS creep rate<br />
+                    $K_1$ is a material based constant <br />
+                    $\sigma$ is the applied stress<br />
+                    $n$ is a material based constant
+                </p>
+            </div>
 
             <img
                 src="media/robot/compressed_version/TPUvPLAstressstrain.webp"

@@ -255,10 +255,9 @@
                 "
             >
                 The goal of this project is to design a low cost 6 DOF robotic
-                arm. The project includes everything from harmonic drive design
-                to task planning. The most notable feature of this robot is its
-                impedance control with low cost hardware and the flexure based
-                end effector design.
+                arm. The project is to include everything from harmonic drive
+                design to task planning. The most notable feature of this robot
+                will be its impedance control with low cost hardware.
             </p>
         </section>
 
@@ -288,12 +287,8 @@
                     backdrivable high gear ratio hand crank fan for a class
                     project where my team was designing 1-D electromechanical
                     Flappy Bird. Shortly after prototyping a harmonic drive for
-                    the manual fan, I realized that it was quite an elegant
-                    design because of its low part count and low cost. Shortly
-                    afterwards, I jumped into making this robotic arm. The
-                    harmonic drive is designed around PLA and I chose to make
-                    the tooth profile involute, although from my research it was
-                    unclear if this was the optimal choice for harmonic drives.
+                    the fan, I realized that it was quite an elegant design due
+                    to its low part count and therefore cost.
                 </p>
             </div>
             <div
@@ -347,10 +342,9 @@
                 >
                     In the second week of this project I worked on refining the
                     gearbox design and realized that it would my life much
-                    easier if every single joint was modular. I also decided
-                    that the robot arm would be driven by common nema 17
-                    steppers and their position would be determined by magnetic
-                    encoders.
+                    easier if most joints were modular. I also decided that the
+                    robot arm would be driven by nema 17 stepper motors with
+                    magnetic encoders.
                 </p>
             </div>
             <div class="image-container">
@@ -395,51 +389,12 @@
             >
                 My concerns about the strain wave gear creeping were validated.
                 After leaving the actuator assembled overnight, I observed a
-                noticeable 'speed bump' effect that was the strain wave gear
-                being an oval instead of a circle. However, there is a path
-                forward: as shown below, creep is a function of stress;
-                therefore, if I minimize stress then I minimize creep. I have
-                already optimized the gearbox for as little strain as possible,
-                so I have to choose a material with a low Young's modulus to
-                minimize stress for the strain levels I am driving. (Graph from
-                <a
-                    href="https://hcied.info/papers/pgmfilament-composite23.pdf"
-                    target="_blank"
-                    style="color: var(--black); text-decoration: underline"
-                >
-                    this</a
-                >
-                paper)
+                noticeable 'speed bump' effect every time the input shaft
+                rotated from the deformation of the strain wave gear. However,
+                there was a path forward: I printed a TPU gear and the stiffness
+                is so low that creep does not affect the operation of the
+                gearbox.
             </p>
-
-            <div
-                style="
-                    text-align: center;
-                    margin-top: -3rem;
-                    margin-bottom: 2rem;
-                    font-size: 20px;
-                "
-            >
-                <p style="font-size: 30px; color: var(--black)">
-                    $$\dot{\varepsilon}_s = K_1 \sigma^n$$
-                </p>
-
-                <p
-                    style="
-                        font-size: 16px;
-                        color: var(--black);
-                        margin-top: 1rem;
-                        padding-left: 15%;
-                        padding-right: 15%;
-                    "
-                >
-                    Where:<br />
-                    $\dot{\varepsilon}_s$ is the SS creep rate<br />
-                    $K_1$ is a material based constant <br />
-                    $\sigma$ is the applied stress<br />
-                    $n$ is a material based constant
-                </p>
-            </div>
 
             <img
                 src="media/robot/compressed_version/TPUvPLAstressstrain.webp"
@@ -457,10 +412,9 @@
                     color: var(--black);
                 "
             >
-                In addition to discovering this creep issue, I also spent time
-                finishing the design for the the arm's base and also started to
-                explore flexure designs for different gripper mechanisms and/or
-                joints.
+                In addition to discovering and solving this creep issue, I also
+                spend some time knocking out the arm's base and also started to
+                explore different end effectors.
             </p>
         </div>
 
